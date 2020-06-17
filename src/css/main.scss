@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     background: #221F2E;
 }
@@ -9,5 +15,31 @@ nav {
             text-decoration: none;
             color:white;
         }
+    }
+}
+
+.map-legend{
+    list-style: none;
+    position: absolute;
+    background-color: #00000080;
+    z-index: 10;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    right:40px;
+    .map-legend-item{
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        .map-legend-color{
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            margin-right: 20px;
+        }
+        color:white;
     }
 }

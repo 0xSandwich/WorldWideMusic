@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import countryTag from "../assets/coutrytag";
 import genderColors from "../assets/GenderColors";
 import CountryDetails from "./CountryDetails.js";
+import MapLegend from "./MapLegend.js";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as am4charts from "@amcharts/amcharts4/charts";
@@ -11,7 +12,7 @@ am4core.useTheme(am4themes_animated);
 
 
 export default class Map extends Component {
-    curDecade = "2010"
+    curDecade = "1990"
     morphedPolygon = null
     albumData = null
     colorSet = new am4core.ColorSet()
@@ -72,7 +73,6 @@ export default class Map extends Component {
                         
                     }
                 });
-                console.log(max+" "+maxgenre+" "+maxcolor)
                 let hs = target.states.create("hover");
                 hs.properties.fill = am4core.color(maxcolor);
             }
@@ -82,7 +82,7 @@ export default class Map extends Component {
     // Set pie chart info for the clicked country
     showPieChart = (polygon) => {
         if (this.albumData==="err"){
-            console.log("closed")
+            console.log("not found")
         }
         this.genres=[
             [this.albumData[0].blues,genderColors.blues],
@@ -120,9 +120,10 @@ export default class Map extends Component {
                 1
             ));
         }
-    
+        
         this.pieSeries.show();
         this.pieChart.show();
+        this.hideSmall(this.pieSeries.dataItems.values)
     }
     // Get polygon to morph in pie chart
     selectPolygon = (polygon) => {
@@ -251,7 +252,8 @@ export default class Map extends Component {
         let pieSeries = pieChart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "category";
-        pieSeries.data = [
+        
+        pieChart.data = [
             { value: 100, category: "Blues" },
             { value: 100, category: "Classical" },
             { value: 100, category: "Electronic" },
@@ -264,6 +266,7 @@ export default class Map extends Component {
             { value: 100, category: "Reggae" },
             { value: 100, category: "Rock" }
         ];
+        
         // Chart styling
         var dropShadowFilter = new am4core.DropShadowFilter();
         dropShadowFilter.blur = 4;
@@ -283,13 +286,25 @@ export default class Map extends Component {
         var labelTemplate = pieSeries.labels.template;
         labelTemplate.nonScaling = true;
         labelTemplate.fill = am4core.color("#000000");
-        labelTemplate.fontSize = 10;
+        labelTemplate.fontSize = 20;
         labelTemplate.background = new am4core.RoundedRectangle();
         labelTemplate.background.fillOpacity = 0.9;
-        labelTemplate.padding(4, 9, 4, 9);
+        labelTemplate.padding(10, 15, 10, 15);
         labelTemplate.background.fill = am4core.color("#FFFFFF");
+        console.log(pieSeries)
+        
         this.pieSeries = pieSeries
         this.pieChart = pieChart
+    }
+    hideSmall = (slices) => {
+        slices.forEach(element => {
+            if(element.values.value.value == 0){
+                element.hide()
+            }
+            else{
+                element.show()
+            }
+        });
     }
     componentWillUnmount(){
         if (this.map) {
@@ -300,6 +315,7 @@ export default class Map extends Component {
     render(){
     return (
     <div className="App">
+        <MapLegend/>
         <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} ></CountryDetails>
         <div id="chartdiv" style={{ width: "100%", height: "800px" }}></div>
     </div>)
