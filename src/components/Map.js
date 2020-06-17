@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import countryTag from "../assets/coutrytag";
+import genderColors from "../assets/GenderColors";
 import CountryDetails from "./CountryDetails.js";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -15,6 +16,7 @@ export default class Map extends Component {
     albumData = null
     colorSet = new am4core.ColorSet()
     countryclicked=false
+    hoverGenre=null
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -23,33 +25,77 @@ export default class Map extends Component {
         .then(({data})=> {
             this.albumData = data
             if(this.albumData.length<1){
+                // Error handling
                 this.albumData = "err"
             }
             else{
                 // Get current polygon
                 this.selectPolygon(target);
             }
-            console.log(this.albumData)
+        })
+        .catch(err => console.log(err));
+    }
+    getBestGenre = (country,target) => {
+        let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
+        fetch(query)
+        .then(response => response.json())
+        .then(({data})=> {
+            this.hoverGenre = data
+            if(this.hoverGenre.length<1){
+                // Error handling
+                this.hoverGenre = "err"
+            }
+            else{
+                let values=[
+                    [this.hoverGenre[0].blues,genderColors.blues,"blues"],
+                    [this.hoverGenre[0].classical,genderColors.classical,"classical"],
+                    [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
+                    [this.hoverGenre[0].folk,genderColors.folk,"folk"],
+                    [this.hoverGenre[0].funk,genderColors.funk,"funk"],
+                    [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
+                    [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
+                    [this.hoverGenre[0].latin,genderColors.latin,"latin"],
+                    [this.hoverGenre[0].pop,genderColors.pop,"pop"],
+                    [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
+                    [this.hoverGenre[0].rock,genderColors.rock,"rock"]
+                ]
+                let max = 0
+                let maxgenre = 0
+                let maxcolor = 0
+                values.forEach(element => {
+                    if (element[0] > max){
+                        max = element[0]
+                        maxgenre = element[2]
+                        maxcolor = element[1]
+                    }
+                    else {
+                        
+                    }
+                });
+                console.log(max+" "+maxgenre+" "+maxcolor)
+                let hs = target.states.create("hover");
+                hs.properties.fill = am4core.color(maxcolor);
+            }
         })
         .catch(err => console.log(err));
     }
     // Set pie chart info for the clicked country
     showPieChart = (polygon) => {
-        if (this.albumData=="err"){
+        if (this.albumData==="err"){
             console.log("closed")
         }
         this.genres=[
-            [this.albumData[0].blues,"blue"],
-            [this.albumData[0].classical,"red"],
-            [this.albumData[0].electronic,"green"],
-            [this.albumData[0].folk,"grey"],
-            [this.albumData[0].funk,"purple"],
-            [this.albumData[0].hiphop,"orange"],
-            [this.albumData[0].jazz,"yellow"],
-            [this.albumData[0].latin,"brown"],
-            [this.albumData[0].pop,"#c300ff"],
-            [this.albumData[0].reggae,"#00ffc8"],
-            [this.albumData[0].rock,"#ffc573"]
+            [this.albumData[0].blues,genderColors.blues],
+            [this.albumData[0].classical,genderColors.classical],
+            [this.albumData[0].electronic,genderColors.electronic],
+            [this.albumData[0].folk,genderColors.folk],
+            [this.albumData[0].funk,genderColors.funk],
+            [this.albumData[0].hiphop,genderColors.hiphop],
+            [this.albumData[0].jazz,genderColors.jazz],
+            [this.albumData[0].latin,genderColors.latin],
+            [this.albumData[0].pop,genderColors.pop],
+            [this.albumData[0].reggae,genderColors.reggae],
+            [this.albumData[0].rock,genderColors.rock]
         ]
         polygon.polygon.measure();
         let radius = polygon.polygon.measuredWidth / 2 * polygon.globalScale / this.map.seriesContainer.scale;
@@ -166,7 +212,7 @@ export default class Map extends Component {
         chart.series.push(polygonSeries);
 
         // Exclude countries
-        polygonSeries.exclude = ["AQ"];
+        polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX"];
 
         // Configure series
         let polygonTemplate = polygonSeries.mapPolygons.template;
@@ -180,9 +226,9 @@ export default class Map extends Component {
         desaturateFilter.saturation = 1;
         polygonTemplate.filters.push(desaturateFilter);
 
-        // Create hover state and set alternative fill color
-        var hoverState = polygonTemplate.states.create("hover");
-        hoverState.properties.fill = am4core.color("#367B25");
+        polygonTemplate.events.on("over",function(event){
+            this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
+        }.bind(this))
 
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
