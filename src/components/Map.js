@@ -16,17 +16,28 @@ export default class Map extends Component {
     colorSet = new am4core.ColorSet()
     countryclicked=false
     // Get album info for the clicked country
-    getAlbum=(country)=>{
+    getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
         fetch(query)
         .then(response => response.json())
         .then(({data})=> {
             this.albumData = data
+            if(this.albumData.length<1){
+                this.albumData = "err"
+            }
+            else{
+                // Get current polygon
+                this.selectPolygon(target);
+            }
+            console.log(this.albumData)
         })
         .catch(err => console.log(err));
     }
     // Set pie chart info for the clicked country
     showPieChart = (polygon) => {
+        if (this.albumData=="err"){
+            console.log("closed")
+        }
         this.genres=[
             [this.albumData[0].blues,"blue"],
             [this.albumData[0].classical,"red"],
@@ -176,9 +187,7 @@ export default class Map extends Component {
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
             // Requète pour obtenir les stats pour l'année / pays en cours
-            this.getAlbum(countryTag[event.target.dataItem.dataContext.id])
-            // Get current polygon
-            this.selectPolygon(event.target);
+            this.getAlbum(countryTag[event.target.dataItem.dataContext.id],event.target)
         }.bind(this));
         // Binding to component property to acess in other functions
         this.map = chart;
@@ -235,9 +244,6 @@ export default class Map extends Component {
         labelTemplate.background.fill = am4core.color("#FFFFFF");
         this.pieSeries = pieSeries
         this.pieChart = pieChart
-    }
-    componentDidUpdate(){
-        console.log('UPDATE')
     }
     componentWillUnmount(){
         if (this.map) {
