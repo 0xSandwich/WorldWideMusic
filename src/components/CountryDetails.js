@@ -1,6 +1,8 @@
 import React from 'react'
 
 function CountryDetails(props) {
+    let country = (props.data == null) ? null : props.data[0].country
+    let decade = (props.data == null) ? null : props.data[0].decade
     let blues = (props.data == null) ? null : props.data[0].blues
     let classical = (props.data == null) ? null : props.data[0].classical
     let electronic = (props.data == null) ? null : props.data[0].electronic
@@ -14,7 +16,7 @@ function CountryDetails(props) {
     let rock = (props.data == null) ? null : props.data[0].rock
     return (
         <div>
-            <h1>{funk}</h1>
+            <h1 style={{color:"white"}}>{country} in {decade}</h1>
         </div>
     )
 }

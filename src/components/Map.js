@@ -98,9 +98,11 @@ export default class Map extends Component {
             [this.albumData[0].rock,genderColors.rock]
         ]
         polygon.polygon.measure();
-        let radius = polygon.polygon.measuredWidth / 2 * polygon.globalScale / this.map.seriesContainer.scale;
+        let radius = 70;
+        let innerRadius = 50;
         this.pieChart.width = radius * 2;
         this.pieChart.height = radius * 2;
+        this.pieChart.innerRadius=innerRadius
         this.pieChart.radius = radius;
     
         let centerPoint = am4core.utils.spritePointToSvg(polygon.polygon.centerPoint, polygon.polygon);
@@ -196,6 +198,10 @@ export default class Map extends Component {
                 polygon.defaultState.properties.fillOpacity = 0.5;
                 polygon.animate([{ property: "fillOpacity", to: 0.5 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
             }
+            else{
+                polygon.defaultState.properties.fillOpacity = 0;
+                polygon.animate([{ property: "fillOpacity", to: 0 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
+            }
         }
     }
     componentDidMount(){
@@ -273,9 +279,12 @@ export default class Map extends Component {
         pieSeries.filters.push(dropShadowFilter);
 
         var sliceTemplate = pieSeries.slices.template;
-        sliceTemplate.fillOpacity = 1;
+        sliceTemplate.fillOpacity = 1
+        sliceTemplate.cornerRadius=3
         sliceTemplate.strokeWidth=0;
         // Remove default animation
+        pieSeries.slices.template.states.getKey("hover").properties.scale = 1;
+        pieSeries.slices.template.states.getKey("active").properties.shiftRadius = 0;
         var hiddenState = pieSeries.hiddenState;
         hiddenState.properties.startAngle = pieSeries.startAngle;
         hiddenState.properties.endAngle = pieSeries.endAngle;
@@ -291,18 +300,22 @@ export default class Map extends Component {
         labelTemplate.background.fillOpacity = 0.9;
         labelTemplate.padding(10, 15, 10, 15);
         labelTemplate.background.fill = am4core.color("#FFFFFF");
-        console.log(pieSeries)
+        pieSeries.labels.template.text = "{value.value}";
+
         
         this.pieSeries = pieSeries
         this.pieChart = pieChart
     }
     hideSmall = (slices) => {
-        slices.forEach(element => {
-            if(element.values.value.value == 0){
+        slices.forEach((element, index) => {
+            if(element.values.value.value === 0){
                 element.hide()
             }
             else{
                 element.show()
+                element.label.background.fill = am4core.color(this.genres[index][1])
+                // element.label
+                console.log(element.dataContext.category)
             }
         });
     }
