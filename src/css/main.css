@@ -6,33 +6,73 @@
 body {
   background: #221F2E; }
 
-nav ul {
-  list-style: none; }
-  nav ul li a {
-    text-decoration: none;
-    color: white; }
+header {
+  position: absolute;
+  width: 100vw;
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; }
+  header nav ul {
+    display: flex;
+    list-style: none; }
+    header nav ul li a {
+      text-decoration: none;
+      color: white; }
 
-.map-legend {
+.map-chart {
+  width: 100vw;
+  height: 100vh; }
+
+.map-breadcrumb {
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  top: 40px; }
+  .map-breadcrumb h1 {
+    width: fit-content;
+    padding: 10px 40px;
+    margin: 0 auto;
+    background-color: #00000050;
+    border-radius: 15px;
+    text-align: center; }
+
+.legend-home .map-legend {
   list-style: none;
   position: absolute;
-  background-color: #00000080;
+  background-color: #00000020;
   z-index: 10;
-  border-radius: 15px;
   padding: 20px;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
-  right: 40px; }
-  .map-legend .map-legend-item {
+  margin: 0 auto;
+  bottom: 0; }
+  .legend-home .map-legend .map-legend-item {
     text-transform: capitalize;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 30px;
     color: white; }
-    .map-legend .map-legend-item .map-legend-color {
+    .legend-home .map-legend .map-legend-item .map-legend-color {
       width: 20px;
       height: 20px;
       border-radius: 100%;
-      margin-right: 20px; }
+      margin-right: 10px; }
+
+.modal {
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .modal div {
+    width: 400px;
+    height: 150px; }
 
 /*# sourceMappingURL=main.css.map */

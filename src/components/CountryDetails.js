@@ -13,10 +13,10 @@ function CountryDetails(props) {
     let latin = (props.data == null) ? null : props.data[0].latin
     let pop = (props.data == null) ? null : props.data[0].pop
     let reggae = (props.data == null) ? null : props.data[0].reggae
-    let rock = (props.data == null) ? null : props.data[0].rock
+    let rock = (props.data == null) ? null : props.data[0].rock 
     return (
-        <div>
-            <h1 style={{color:"white"}}>{country} in {decade}</h1>
+        <div className="map-breadcrumb">
+            <h1 hidden={country ? false : true} style={{color:"white"}}>{country} in {decade}</h1>
         </div>
     )
 }

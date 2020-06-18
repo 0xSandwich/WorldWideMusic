@@ -226,7 +226,7 @@ export default class Map extends Component {
         polygonTemplate.tooltipText = "{name}";
         polygonTemplate.strokeWidth=0
         polygonTemplate.strokeOpacity=0
-        polygonTemplate.fill = am4core.color("#5A3FCC");
+        polygonTemplate.fill = am4core.color("#514E61");
 
         // desaturate filter for countries
         var desaturateFilter = new am4core.DesaturateFilter();
@@ -280,8 +280,9 @@ export default class Map extends Component {
 
         var sliceTemplate = pieSeries.slices.template;
         sliceTemplate.fillOpacity = 1
-        sliceTemplate.cornerRadius=3
         sliceTemplate.strokeWidth=0;
+        sliceTemplate.tooltipText = "{category}: {value.value} / {value.percent} %";
+        
         // Remove default animation
         pieSeries.slices.template.states.getKey("hover").properties.scale = 1;
         pieSeries.slices.template.states.getKey("active").properties.shiftRadius = 0;
@@ -290,7 +291,7 @@ export default class Map extends Component {
         hiddenState.properties.endAngle = pieSeries.endAngle;
         hiddenState.properties.opacity = 0;
         hiddenState.properties.visible = false;
-        pieSeries.hiddenState.transitionDuration = 200;
+        pieSeries.hiddenState.transitionDuration = 100;
         // Labels styling
         var labelTemplate = pieSeries.labels.template;
         labelTemplate.nonScaling = true;
@@ -307,11 +308,19 @@ export default class Map extends Component {
         this.pieChart = pieChart
     }
     hideSmall = (slices) => {
+        let allNull = false
         slices.forEach((element, index) => {
             if(element.values.value.value === 0){
                 element.hide()
+                if (index === slices.length-1 && allNull === false){
+                    console.log('all null')
+                    this.allNull=true
+                    this.forceUpdate()
+                    // TO DO :show modal
+                }
             }
             else{
+                allNull=true
                 element.show()
                 element.label.background.fill = am4core.color(this.genres[index][1])
                 // element.label
@@ -324,13 +333,16 @@ export default class Map extends Component {
             this.map.dispose();
         }
     }
+    modalReset = () =>{
+        this.allNull = false
+    }
     
     render(){
     return (
     <div className="App">
-        <MapLegend/>
+        <MapLegend legendClass="legend-home" data={this.albumData} showData="true"/>
         <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} ></CountryDetails>
-        <div id="chartdiv" style={{ width: "100%", height: "800px" }}></div>
+        <div id="chartdiv" className="map-chart"></div>
     </div>)
     }
 }
