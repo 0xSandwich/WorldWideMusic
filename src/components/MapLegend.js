@@ -18,7 +18,6 @@ function MapLegend(props) {
             ])
         })
     }
-    console.log(data)
     let listItems = data.map((element, key) =>
         <li className="map-legend-item" key={key}>
             <div className="map-legend-color" style={{backgroundColor: element[1]}}></div>

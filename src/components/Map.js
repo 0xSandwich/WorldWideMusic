@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import countryTag from "../assets/coutrytag";
+import countryTag from "../assets/CountryTag";
 import genderColors from "../assets/GenderColors";
 import CountryDetails from "./CountryDetails.js";
+import DecadeInput from "./DecadeInput.js";
 import MapLegend from "./MapLegend.js";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -333,13 +334,16 @@ export default class Map extends Component {
             this.map.dispose();
         }
     }
-    modalReset = () =>{
-        this.allNull = false
+    handleNav = (target) =>{
+        this.curDecade = target
+        console.log(this.curDecade)
+        this.forceUpdate()
     }
     
     render(){
     return (
     <div className="App">
+        <DecadeInput handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} showData="true"/>
         <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} ></CountryDetails>
         <div id="chartdiv" className="map-chart"></div>

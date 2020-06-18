@@ -63,6 +63,10 @@ header {
       border-radius: 100%;
       margin-right: 10px; }
 
+.decade-input {
+  position: absolute;
+  z-index: 10; }
+
 .modal {
   z-index: 10;
   position: absolute;
