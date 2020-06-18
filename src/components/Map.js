@@ -19,6 +19,7 @@ export default class Map extends Component {
     colorSet = new am4core.ColorSet()
     countryclicked=false
     hoverGenre=null
+    prevPolygon={fill:null}
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -32,7 +33,7 @@ export default class Map extends Component {
             }
             else{
                 // Get current polygon
-                this.selectPolygon(target);
+                this.selectPolygon(target); 
             }
         })
         .catch(err => console.log(err));
@@ -76,6 +77,7 @@ export default class Map extends Component {
                 });
                 let hs = target.states.create("hover");
                 hs.properties.fill = am4core.color(maxcolor);
+                this.maxGenre = maxcolor
             }
         })
         .catch(err => console.log(err));
@@ -100,7 +102,7 @@ export default class Map extends Component {
         ]
         polygon.polygon.measure();
         let radius = 70;
-        let innerRadius = 50;
+        let innerRadius = 30;
         this.pieChart.width = radius * 2;
         this.pieChart.height = radius * 2;
         this.pieChart.innerRadius=innerRadius
@@ -123,13 +125,19 @@ export default class Map extends Component {
                 1
             ));
         }
-        
+
+        // Fill country by genre color
+        polygon.fill= this.maxGenre
+        this.prevPolygon = polygon
+        console.log(polygon.fill)
+
         this.pieSeries.show();
         this.pieChart.show();
         this.hideSmall(this.pieSeries.dataItems.values)
     }
     // Get polygon to morph in pie chart
     selectPolygon = (polygon) => {
+        this.prevPolygon.fill=am4core.color("#514E61")
         if (this.morphedPolygon !== polygon) {
             var animation = this.pieSeries.hide();
             if (animation) {
@@ -145,15 +153,9 @@ export default class Map extends Component {
     // Morph polygon (country) to pie chart
     morphToCircle = (polygon) => {
         var animationDuration = polygon.polygon.morpher.morphDuration;
-        // if there is a country already morphed to circle, morph it back
-        this.morphBack();
         this.countryclicked=true
         this.forceUpdate()
-        // morph polygon to circle
         polygon.toFront();
-        polygon.polygon.morpher.morphToSingle = true;
-        var morphAnimation = polygon.polygon.morpher.morphToCircle();
-    
         polygon.strokeOpacity = 0; // hide stroke for lines not to cross countries
     
         polygon.defaultState.properties.fillOpacity = 1;
@@ -162,23 +164,12 @@ export default class Map extends Component {
         // save currently morphed polygon4
         this.morphedPolygon = polygon;
 
-        this.fadeOut(polygon);
-    
-        if (morphAnimation) {
-            morphAnimation.events.on("animationended", function () {
-                this.zoomToCountry(polygon);
-            }.bind(this))
-        }
-        else {
-            this.zoomToCountry(polygon);
-        }
+        this.zoomToCountry(polygon);
+        
     }
     morphBack = () =>{
-        if (this.morphedPolygon) {
             this.countryclicked = false
             this.forceUpdate()
-            this.morphedPolygon.polygon.morpher.morphBack();
-        }
     }
     zoomToCountry = (polygon) => {
         var zoomAnimation = this.map.zoomToMapObject(polygon, 2.2, true);
@@ -213,11 +204,17 @@ export default class Map extends Component {
         chart.projection = new am4maps.projections.Miller();
         chart.logo.disabled=true
         chart.seriesContainer.draggable = false;
+        chart.seriesContainer.resizable = false;
+        chart.seriesContainer.events.disableType("doublehit");
+        chart.chartContainer.background.events.disableType("doublehit");
 
         // Create series
         let polygonSeries = new am4maps.MapPolygonSeries();
         polygonSeries.useGeodata = true;
         chart.series.push(polygonSeries);
+
+        // Background on click
+        chart.chartContainer.background.events.on("hit", function () { console.log('ok') });
 
         // Exclude countries
         polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX"];
@@ -338,6 +335,7 @@ export default class Map extends Component {
         this.curDecade = target
         console.log(this.curDecade)
         this.forceUpdate()
+
     }
     
     render(){
