@@ -1,54 +1,136 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// FONTS
+
+@font-face {
+  font-family: "Europa-Bold";
+  src: url("../assets/fonts/Europa-Bold.woff") format("woff2"),
+    url("../assets/fonts/Europa-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
-
-$background-color:#221F2E;
-body{
-    background: $background-color;
+@font-face {
+  font-family: "Europa-Regular";
+  src: url("../assets/fonts/Europa-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Europa-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-header{
-    position: absolute;
-    width: 100vw;
-    z-index: 8;
+// COLORS
+$background-color: #221f2e;
+$link-inactive-color: rgba(255, 255, 255, 0.5);
+$text-color: rgba(255, 255, 255, 0.7);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Europa-Regular";
+}
+
+body {
+  background: $background-color;
+}
+
+/*
+*
+TYPO
+*
+*/
+
+// title
+h1 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-family: "Europa-Bold";
+}
+
+// link
+a {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transition-duration: 0.4s;
+}
+
+// text
+p {
+  color: $text-color;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/*
+*
+HEADER
+*
+*/
+
+header {
+  position: absolute;
+  // background-color: red;
+  height: 20vh;
+  width: 100vw;
+  padding: 100px;
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  nav ul {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    nav ul{
-        display: flex;
-        list-style: none;
-        li a{
-            text-decoration: none;
-            color:white;
-        }
+    list-style: none;
+    li a {
+      color: $link-inactive-color;
+      margin-left: 20px;
     }
+    li a.link-active {
+      color: white;
+    }
+    li a:hover {
+      color: white;
+    }
+    li span {
+      color: $link-inactive-color;
+      margin-left: 20px;
+    }
+  }
 }
 
-.map-chart{
-    width: 100vw;
-    height: 100vh;
-}
-.map-breadcrumb{
-    z-index: 10;
-    position: absolute;
-    width: 100vw;
-    top:40px;
-    h1{
-        width: fit-content;
-        padding: 10px 40px;
-        margin: 0 auto;
-        background-color: #00000050;
-        border-radius: 15px;
-        text-align: center;
-    }
+/*
+*
+MAP
+*
+*/
+
+.map-chart {
+  width: 100vw;
+  height: 100vh;
 }
 
-.legend-home{
- .map-legend{
+.map-breadcrumb {
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  top: 40px;
+  h1 {
+    width: fit-content;
+    padding: 10px 40px;
+    margin: 0 auto;
+    background-color: #00000050;
+    border-radius: 15px;
+    text-align: center;
+  }
+}
+
+.legend-home {
+  .map-legend {
     list-style: none;
     position: absolute;
     background-color: #00000020;
@@ -60,39 +142,139 @@ header{
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 0 auto;
-    bottom:0;
-    .map-legend-item{
-        text-transform: capitalize;
-        display: flex;
-        align-items: center;
-        padding: 10px 30px;
-        .map-legend-color{
-            width: 20px;
-            height: 20px;
-            border-radius: 100%;
-            margin-right: 10px;
-        }
-        color:white;
+    bottom: 0;
+    .map-legend-item {
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      padding: 10px 30px;
+      .map-legend-color {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        margin-right: 10px;
+      }
+      color: white;
     }
-}   
+  }
 }
 
-.decade-input{
-    position: absolute;
-    z-index: 10;
+.decade-input {
+  position: absolute;
+  z-index: 10;
 }
 
+.modal {
+  z-index: 10;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 400px;
+    height: 150px;
+  }
+}
 
-.modal{
-    z-index:10;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
+/*
+*
+HOME PAGE
+*
+*/
+
+.home-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  // background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  p {
+    width: 40vw;
+    text-align: center;
+  }
+
+  .start-button {
+    font-family: "Europa-Bold";
+    font-size: 14px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    div{
-        width: 400px;
-        height: 150px;
-    }
+    width: 110px;
+    height: 40px;
+    border-radius: 5px;
+    background: linear-gradient(#5651e9 0%, #4946e2);
+  }
+  .start-button:hover {
+    background: linear-gradient(#6f6af1 0%, #5d5bf0);
+  }
+  .wave {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    // background: url('../assets/images/wave.svg');
+    // animation : wave-animation 10s linear infinite;
+  }
+  // .wave:before{
+  //   content: '';
+  //   width: 100%;
+  //   height: 158px;
+  //   background: url('../assets/images/wave.svg');
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   opacity: 0.4;
+  //   animation : wave-animation-reverse 10s linear infinite;
+  // }
+  // .wave:after{
+  //   content: '';
+  //   width: 100%;
+  //   height: 158px;
+  //   background: url('../assets/images/wave.svg');
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   opacity: 0.6;
+  //   animation-delay: 5s;
+  //   animation : wave-animation 20s linear infinite;
+  // }
+  .map{
+    width: 80%;
+    height: 100%;
+    z-index: -100;
+    opacity: 0.1;
+    position: absolute;
+  }
+}
+
+// ANIMATIONS
+
+@keyframes wave-animation{
+  0%{
+    background-position: 0;
+  }
+  100%{
+    background-position: 1600px;
+  }
+}
+
+@keyframes wave-animation-reverse{
+  0%{
+    background-position: 1600px;
+  }
+  100%{
+    background-position: 0px;
+  }
 }
