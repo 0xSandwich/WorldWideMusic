@@ -1,6 +1,7 @@
 import React from "react"
 import genderColors from "../assets/GenderColors"
 import productAlbums from "../assets/images/productAlbums.svg"
+import closeButton from "../assets/images/close.svg"
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -64,7 +65,10 @@ function CountryDetails(props) {
       <th scope="row" key={key + Math.random()}>
         <div
           className="modal-genre-color"
-          style={{ backgroundColor: element[1] }}> </div>
+          style={{ backgroundColor: element[1] }}
+        >
+          {" "}
+        </div>
       </th>
       <th scope="row" key={key + Math.random()}>
         {genresName[key]}
@@ -89,7 +93,7 @@ function CountryDetails(props) {
         </h1>
       </div>
       <div className="country-modal">
-        <i className="close-modal">X</i>
+        <img className="close-modal" src={closeButton} alt="close" />
         <h1>MOST PRODUCED GENRES</h1>
         <h3>• Number of produced albums</h3>
         <div className="product-albums-container">
@@ -98,11 +102,12 @@ function CountryDetails(props) {
         </div>
         <h3>• Most produced genres</h3>
         <table>
+          <div class="line-separator"></div>
           <tbody className="genres-container">
             <tr>
               <th class="type-colors" scope="col"></th>
               <th class="music-type" scope="col"></th>
-              <th scope="col"></th>
+              <th class="music-value" scope="col"></th>
               <th scope="col"></th>
               <th class="albums" scope="col"></th>
             </tr>
