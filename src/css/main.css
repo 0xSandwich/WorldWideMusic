@@ -300,7 +300,8 @@ COUNTRY DETAILS
     position: absolute;
     right: 45px;
     top: 55px;
-    width: 18px; }
+    width: 18px;
+    cursor: pointer; }
   .country-modal .product-albums-container {
     width: 100%;
     margin-bottom: 40px; }
