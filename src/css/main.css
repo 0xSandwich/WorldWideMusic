@@ -284,6 +284,11 @@ COUNTRY DETAILS
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start; }
+  .country-modal .modal-genre-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 10px; }
   .country-modal .close-modal {
     position: absolute;
     right: 30px;

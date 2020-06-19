@@ -362,6 +362,12 @@ COUNTRY DETAILS
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  .modal-genre-color{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
   .close-modal {
     position: absolute;
     right: 30px;
