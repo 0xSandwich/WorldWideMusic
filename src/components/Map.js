@@ -75,9 +75,6 @@ export default class Map extends Component {
                     }
                 });
                 target.fill=am4core.color(maxcolor)
-                setTimeout(()=>{
-                    target.fill=am4core.color("#514E61")
-                },500)
                 this.maxGenre = maxcolor
             }
         })
