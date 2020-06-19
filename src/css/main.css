@@ -288,10 +288,20 @@ COUNTRY DETAILS
     position: absolute;
     right: 30px;
     top: 30px; }
-  .country-modal .genres-container tr th {
-    color: white;
-    text-align: left;
-    line-height: 24px;
-    font-size: 14px; }
+  .country-modal .product-albums-container {
+    width: 100%;
+    margin-bottom: 40px; }
+    .country-modal .product-albums-container img {
+      height: 50px;
+      margin-right: 10px; }
+  .country-modal table {
+    width: 100%; }
+    .country-modal table .genres-container tr th {
+      color: white;
+      text-align: left;
+      line-height: 24px;
+      font-size: 14px; }
+    .country-modal table .genres-container th.music-type {
+      width: 50%; }
 
 /*# sourceMappingURL=main.css.map */

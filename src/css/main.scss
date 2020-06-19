@@ -347,7 +347,7 @@ COUNTRY DETAILS
 *
 */
 
-.country-modal{
+.country-modal {
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
@@ -362,19 +362,36 @@ COUNTRY DETAILS
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  .close-modal{
+  .close-modal {
     position: absolute;
     right: 30px;
-    top:30px ;
+    top: 30px;
   }
-  .genres-container{
-    // background-color: red;
-    tr th{
-      color: white;
-      text-align: left;
-      line-height: 24px;
-      font-size: 14px;
-      // width: 100px;
+  .product-albums-container{
+    width: 100%;
+    margin-bottom: 40px;
+    img{
+      height: 50px;
+      margin-right: 10px;
+    }
+  }
+  table {
+    width: 100%;
+    .genres-container {
+      // background-color: red;
+      tr th {
+        color: white;
+        text-align: left;
+        line-height: 24px;
+        font-size: 14px;
+        // width: 100px;
+      }
+      th.music-type {
+        width: 50%;
+      }
+      // th.albums {
+      //   width: 30%;
+      // }
     }
   }
 }
