@@ -65,7 +65,7 @@ header {
     header nav ul li a {
       color: rgba(255, 255, 255, 0.5);
       margin-left: 20px; }
-    header nav ul li a.link-active {
+    header nav ul li a.active {
       color: white; }
     header nav ul li a:hover {
       color: white; }

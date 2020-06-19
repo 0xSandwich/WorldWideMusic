@@ -9,7 +9,7 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <NavLink className="link-active" to="/home">home</NavLink>
+            <NavLink className=".active" to="/home">home</NavLink>
             <span>|</span>
           </li>
           <li>
@@ -17,7 +17,7 @@ function Header() {
             <span>|</span>
           </li>
           <li>
-            <NavLink to="/map">About</NavLink>
+            <NavLink to="/about">About</NavLink>
           </li>
         </ul>
       </nav>
