@@ -4,8 +4,8 @@ import { map } from 'jquery';
 
 function CountryDetails(props) {
     let colors = Object.entries(genderColors)
-    let country = (props.data == null) ? '1' : props.data[0].country
-    let decade = (props.data == null) ? '1' : props.data[0].decade
+    let country = (props.data == null) ? null : props.data[0].country
+    let decade = (props.data == null) ? null : props.data[0].decade
     let genresName = ['Blues','Classical','Electronic','Folk',
     'Funk','Hip-Hop','Jazz','Latin','Pop','Reggae','Rock']
     let genres = []
