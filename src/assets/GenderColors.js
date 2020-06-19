@@ -1,15 +1,15 @@
 let genderColors = {
-    blues:"#1dde50",
-    classical:"#1d7ade",
-    electronic:"#1dcbde",
-    folk:"#b622f5",
-    funk:"#f5227a",
-    hiphop:"#f54222",
-    jazz:"#f5c022",
-    latin:"#22a100",
-    pop:"#75263c",
-    reggae:"#916331",
-    rock:"#ff59e6"
+    blues:"#96FFFF",
+    classical:"#FBFCF7",
+    electronic:"#407EFF",
+    folk:"#B79272",
+    funk:"#FFB7E2",
+    hiphop:"#7571E2",
+    jazz:"#FFD058",
+    latin:"#FFB36C",
+    pop:"#F66CC4",
+    reggae:"#C2F96F",
+    rock:"#FC6565"
 }
 
 export default genderColors
