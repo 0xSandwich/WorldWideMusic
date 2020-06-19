@@ -78,7 +78,7 @@ header {
   // background-color: red;
   height: 20vh;
   width: 100vw;
-  padding: 100px 150px 100px 150px;
+  padding: 20px 150px 0px 150px;
   z-index: 8;
   display: flex;
   justify-content: space-between;
@@ -117,15 +117,33 @@ MAP
 .map-breadcrumb {
   z-index: 10;
   position: absolute;
+  // background-color:red;
   width: 100vw;
-  top: 40px;
+  top: 28px;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   h1 {
+    position: relative;
     width: fit-content;
-    padding: 10px 40px;
-    margin: 0 auto;
-    background-color: #00000050;
-    border-radius: 15px;
-    text-align: center;
+    // margin: 0 auto;
+    &:before {
+      position: absolute;
+      content: "";
+      top: 14px;
+      left: -120px;
+      width: 100px;
+      border: solid 0.5px rgba(255, 255, 255, 0.5);
+    }
+    &:after {
+      position: absolute;
+      content: "";
+      top: 14px;
+      margin-left: 10px;
+      width: 100px;
+      border: solid 0.5px rgba(255, 255, 255, 0.5);
+    }
   }
 }
 
@@ -133,7 +151,7 @@ MAP
   .map-legend {
     list-style: none;
     position: absolute;
-    right : 50px;
+    right: 50px;
     // background-color: #00000020;
     z-index: 10;
     width: 50vw;
@@ -145,7 +163,7 @@ MAP
     .map-legend-item {
       text-transform: capitalize;
       display: flex;
-      text-align: right;
+
       align-items: center;
       width: 180px;
       margin: 10px 0px 10px 0px;
@@ -226,31 +244,31 @@ HOME PAGE
     height: 140px;
     bottom: 0;
     left: 0;
-    background: url('../assets/images/wave.svg');
-    animation : wave-animation 10s linear infinite;
+    background: url("../assets/images/wave.svg");
+    animation: wave-animation 10s linear infinite;
   }
-  .wave:before{
-    content: '';
+  .wave:before {
+    content: "";
     width: 100%;
     height: 140px;
-    background: url('../assets/images/wave.svg');
+    background: url("../assets/images/wave.svg");
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0.4;
-    animation : wave-animation-reverse 10s linear infinite;
+    animation: wave-animation-reverse 10s linear infinite;
   }
-  .wave:after{
-    content: '';
+  .wave:after {
+    content: "";
     width: 100%;
     height: 140px;
-    background: url('../assets/images/wave.svg');
+    background: url("../assets/images/wave.svg");
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0.6;
     animation-delay: 5s;
-    animation : wave-animation 20s linear infinite;
+    animation: wave-animation 20s linear infinite;
   }
   .map {
     width: 80%;
@@ -281,14 +299,13 @@ HOME PAGE
   }
 }
 
-
 /*
 *
 ABOUT PAGE
 *
 */
 
-.about-container{
+.about-container {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -297,18 +314,18 @@ ABOUT PAGE
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  p{
+  p {
     width: 50vw;
     margin-bottom: 50px;
     margin-left: 0px;
   }
-  .map{
+  .map {
     position: absolute;
     right: 0;
     z-index: -10;
     opacity: 0.2;
   }
-  video{
+  video {
     margin-left: 0px;
     outline: none;
     cursor: pointer;
