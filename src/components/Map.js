@@ -253,7 +253,7 @@ export default class Map extends Component {
         let pieSeries = pieChart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "category";
-        
+        pieSeries.labels.template.disabled = true;
         pieChart.data = [
             { value: 100, category: "Blues" },
             { value: 100, category: "Classical" },
@@ -297,6 +297,7 @@ export default class Map extends Component {
         labelTemplate.padding(10, 15, 10, 15);
         labelTemplate.background.fill = am4core.color("#FFFFFF");
         pieSeries.labels.template.text = "{value.value}";
+        pieSeries.labels.template.hide()
 
         
         this.pieSeries = pieSeries
