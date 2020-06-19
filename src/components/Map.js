@@ -11,7 +11,6 @@ import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldHigh";
 am4core.useTheme(am4themes_animated);
 
-
 export default class Map extends Component {
     curDecade = "1990"
     morphedPolygon = null
@@ -75,8 +74,10 @@ export default class Map extends Component {
                         
                     }
                 });
-                let hs = target.states.create("hover");
-                hs.properties.fill = am4core.color(maxcolor);
+                target.fill=am4core.color(maxcolor)
+                setTimeout(()=>{
+                    target.fill=am4core.color("#514E61")
+                },500)
                 this.maxGenre = maxcolor
             }
         })
@@ -128,8 +129,7 @@ export default class Map extends Component {
 
         // Fill country by genre color
         polygon.fill= this.maxGenre
-        this.prevPolygon = polygon
-        console.log(polygon.fill)
+        this.prevPolygon = polygon=
 
         this.pieSeries.show();
         this.pieChart.show();
@@ -199,6 +199,7 @@ export default class Map extends Component {
     componentDidMount(){
         // Create Map
         let chart = am4core.create("chartdiv", am4maps.MapChart);
+        chart.background.visible = false;
         chart.geodata = am4geodata_worldLow;
         chart.useGeodata=true
         chart.projection = new am4maps.projections.Miller();
@@ -213,9 +214,6 @@ export default class Map extends Component {
         polygonSeries.useGeodata = true;
         chart.series.push(polygonSeries);
 
-        // Background on click
-        chart.chartContainer.background.events.on("hit", function () { console.log('ok') });
-
         // Exclude countries
         polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX"];
 
@@ -225,14 +223,16 @@ export default class Map extends Component {
         polygonTemplate.strokeWidth=0
         polygonTemplate.strokeOpacity=0
         polygonTemplate.fill = am4core.color("#514E61");
+        this.polygonTemplate = polygonTemplate
 
         // desaturate filter for countries
         var desaturateFilter = new am4core.DesaturateFilter();
         desaturateFilter.saturation = 1;
         polygonTemplate.filters.push(desaturateFilter);
-
+        
         polygonTemplate.events.on("over",function(event){
             this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
+            this.hover=true
         }.bind(this))
 
         // When a country is clicked
@@ -321,8 +321,6 @@ export default class Map extends Component {
                 allNull=true
                 element.show()
                 element.label.background.fill = am4core.color(this.genres[index][1])
-                // element.label
-                console.log(element.dataContext.category)
             }
         });
     }
@@ -333,7 +331,6 @@ export default class Map extends Component {
     }
     handleNav = (target) =>{
         this.curDecade = target
-        console.log(this.curDecade)
         this.forceUpdate()
 
     }
