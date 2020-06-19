@@ -88,7 +88,7 @@ function CountryDetails(props) {
           {country} in {decade}
         </h1>
       </div>
-      <div className="country-modal">
+      <div style={!country ? {display:"none"} : null} className="country-modal">
         <i className="close-modal">X</i>
         <h1>MOST PRODUCED GENRES</h1>
         <h3>• Number of produced albums</h3>
@@ -100,11 +100,11 @@ function CountryDetails(props) {
         <table>
           <tbody className="genres-container">
             <tr>
-              <th class="type-colors" scope="col"></th>
-              <th class="music-type" scope="col"></th>
+              <th className="type-colors" scope="col"></th>
+              <th className="music-type" scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
-              <th class="albums" scope="col"></th>
+              <th className="albums" scope="col"></th>
             </tr>
             {tablePrint}
           </tbody>

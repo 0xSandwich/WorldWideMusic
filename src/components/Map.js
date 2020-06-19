@@ -232,7 +232,9 @@ export default class Map extends Component {
             this.hover=true
         }.bind(this))
         polygonTemplate.events.on("out",function(event){
-            event.target.fill=am4core.color('#514E61')
+            setTimeout(()=>{
+                event.target.fill=am4core.color('#514E61')
+            },500)
         }.bind(this))
         
         // When a country is clicked
