@@ -1,5 +1,4 @@
 import React from "react"
-import wave from "../assets/images/waveFixe.svg"
 import map from "../assets/images/map.svg"
 import { Link } from "react-router-dom"
 
@@ -17,8 +16,8 @@ function Home() {
       <Link to="/map">
         <div className="start-button">start</div>
       </Link>
-      <img className="map" src={map}></img>  
-      <img className="wave" src={wave}></img>
+      <img className="map" src={map} alt="map"></img>  
+      <div className="wave"></div>
     </section>
   )
 }
