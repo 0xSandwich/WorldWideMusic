@@ -109,7 +109,7 @@ function CountryDetails(props) {
               <th class="music-type" scope="col"></th>
               <th class="music-value" scope="col"></th>
               <th scope="col"></th>
-              <th class="albums" scope="col"></th>
+              <th className="albums" scope="col"></th>
             </tr>
             {tablePrint}
           </tbody>
