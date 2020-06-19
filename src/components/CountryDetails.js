@@ -9,6 +9,7 @@ function CountryDetails(props) {
     let genresName = ['Blues','Classical','Electronic','Folk',
     'Funk','Hip-Hop','Jazz','Latin','Pop','Reggae','Rock']
     let genres = []
+    let genresTest = []
     let percentage = []
     let nbrAlbums
 
@@ -28,6 +29,10 @@ function CountryDetails(props) {
             props.data[0].reggae,
             props.data[0].rock
         )
+
+        console.log(genresTest);
+
+
         // Albums number
         nbrAlbums = genres.reduce((pv, cv) => pv + cv, 0);
 
@@ -35,6 +40,10 @@ function CountryDetails(props) {
         genres.map((element, key) =>
             percentage.push(Math.round((element / nbrAlbums) * 100))
         )
+
+        // Sort by percent
+        // percentage.sort(function(a, b){return b-a})
+        // genres.sort(function(a, b){return b-a})
     }
 
     // console.log(data[0]);
