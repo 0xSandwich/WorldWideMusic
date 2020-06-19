@@ -1,5 +1,6 @@
 import React from "react"
 import genderColors from "../assets/GenderColors"
+import productAlbums from "../assets/images/productAlbums.svg"
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -92,15 +93,19 @@ function CountryDetails(props) {
         <i className="close-modal">X</i>
         <h1>MOST PRODUCED GENRES</h1>
         <h3>• Number of produced albums</h3>
+        <div className="product-albums-container">
+          <img src={productAlbums} alt="productAlbums" />
+          <img src={productAlbums} alt="productAlbums" />
+        </div>
         <h3>• Most produced genres</h3>
         <table>
           <tbody className="genres-container">
             <tr>
+              <th class="test" scope="col"></th>
+              <th class="music-type" scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th class="albums" scope="col"></th>
             </tr>
             {tablePrint}
           </tbody>
