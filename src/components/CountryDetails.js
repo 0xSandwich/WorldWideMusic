@@ -51,8 +51,7 @@ function CountryDetails(props) {
 
     // Print the table of Most produced genres
     let tablePrint = colors.map((element, key) =>
-        <>
-        <tr>
+        <tr key={key+Math.random()}>
             <th scope="row" key={key + Math.random()}>
                 <div className="modal-genre-color" style={{backgroundColor: element[key]}}></div>
             </th>
@@ -61,7 +60,6 @@ function CountryDetails(props) {
             <th scope="row" key={key + Math.random()}>{percentage[key]}</th>
             <th scope="row" key={key + Math.random()}>Albums</th>
         </tr>
-        </>
     );
     
     return (
@@ -74,14 +72,18 @@ function CountryDetails(props) {
                 <h1>MOST PRODUCED GENRES</h1>
                 <h3>Number of produced albums</h3>
                 <h3>Most produced genres</h3>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                {tablePrint}
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        {tablePrint}
+                    </tbody>
+                </table>
             </div>
         </>
     )
