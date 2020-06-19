@@ -63,8 +63,7 @@ function CountryDetails(props) {
       <th scope="row" key={key + Math.random()}>
         <div
           className="modal-genre-color"
-          style={{ backgroundColor: element[key] }}
-        ></div>
+          style={{ backgroundColor: element[1] }}> </div>
       </th>
       <th scope="row" key={key + Math.random()}>
         {genresName[key]}
