@@ -133,24 +133,24 @@ MAP
   .map-legend {
     list-style: none;
     position: absolute;
-    background-color: #00000020;
+    left: 150px;
+    // background-color: #00000020;
     z-index: 10;
-    padding: 20px;
-    width: 100vw;
+    width: 50vw;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    margin: 0 auto;
-    bottom: 0;
+    bottom: 60px;
     .map-legend-item {
       text-transform: capitalize;
       display: flex;
       align-items: center;
-      padding: 10px 30px;
+      width: 180px;
+      margin: 10px 0px 10px 0px;
       .map-legend-color {
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         border-radius: 100%;
         margin-right: 10px;
       }
