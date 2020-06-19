@@ -251,7 +251,8 @@ ABOUT PAGE
     position: absolute;
     right: 0;
     z-index: -10;
-    opacity: 0.2; }
+    opacity: 0.2;
+    height: 70%; }
   .about-container video {
     margin-left: 0px;
     outline: none;
