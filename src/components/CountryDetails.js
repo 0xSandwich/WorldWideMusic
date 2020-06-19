@@ -40,20 +40,21 @@ function CountryDetails(props) {
     // console.log(data[0]);
     console.log(nbrAlbums)
 
-
+    // Print the table of Most produced genres
     let tablePrint = colors.map((element, key) =>
         <>
         <tr>
-            <th scope="row" key={key + Math.random()}>Couleur</th>
+            <th scope="row" key={key + Math.random()}>
+                <div className="modal-genre-color" style={{backgroundColor: element[key]}}></div>
+            </th>
             <th scope="row" key={key + Math.random()}>{genresName[key]}</th>
             <th scope="row" key={key + Math.random()}>{genres[key]}</th>
             <th scope="row" key={key + Math.random()}>{percentage[key]}</th>
-            <th scope="row" key={key + Math.random()}>Couleur</th>
+            <th scope="row" key={key + Math.random()}>Albums</th>
         </tr>
         </>
     );
     
-
     return (
         <>
             <div className="map-breadcrumb">
