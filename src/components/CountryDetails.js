@@ -33,7 +33,7 @@ function CountryDetails(props) {
 
         // Create array and calc percentage of all styles
         genres.map((element, key) =>
-            percentage.push((element / nbrAlbums) * 100)
+            percentage.push(Math.round((element / nbrAlbums) * 100))
         )
     }
 
