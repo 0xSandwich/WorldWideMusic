@@ -231,7 +231,10 @@ export default class Map extends Component {
             this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
             this.hover=true
         }.bind(this))
-
+        polygonTemplate.events.on("out",function(event){
+            event.target.fill=am4core.color('#514E61')
+        }.bind(this))
+        
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
             // Requète pour obtenir les stats pour l'année / pays en cours
