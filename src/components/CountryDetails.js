@@ -100,7 +100,7 @@ function CountryDetails(props) {
         <table>
           <tbody className="genres-container">
             <tr>
-              <th class="test" scope="col"></th>
+              <th class="type-colors" scope="col"></th>
               <th class="music-type" scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>

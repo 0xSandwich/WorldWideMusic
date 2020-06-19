@@ -363,8 +363,8 @@ COUNTRY DETAILS
   align-items: flex-start;
   justify-content: flex-start;
   .modal-genre-color{
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 100%;
     margin-right: 10px;
   }
@@ -392,8 +392,11 @@ COUNTRY DETAILS
         font-size: 14px;
         // width: 100px;
       }
+      th.type-colors {
+        width: 5%;
+      }
       th.music-type {
-        width: 50%;
+        width: 45%;
       }
       // th.albums {
       //   width: 30%;
