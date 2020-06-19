@@ -1,6 +1,7 @@
 import React from "react"
-import poster from "../assets/images/poster.svg"
+// import poster from "../assets/images/poster.svg"
 import map from "../assets/images/map.svg"
+import video from "../assets/video.mp4"
 
 function About() {
   return (
@@ -14,13 +15,8 @@ function About() {
         genres in time and space to show their impact and evolution.
       </p>
       <h1>storytelling</h1>
-      <video
-        src="https://www.youtube.com/watch?v=pok8H_KF1FA"
-        width="500"
-        poster={poster}
-        controls
-      ></video>
-      <img className="map" src={map} alt="map"></img>  
+      <video src={video} width="500" controls></video>
+      <img className="map" src={map} alt="map"></img>
     </section>
   )
 }
