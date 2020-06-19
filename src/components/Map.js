@@ -212,7 +212,7 @@ export default class Map extends Component {
         chart.series.push(polygonSeries);
 
         // Exclude countries
-        polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX"];
+        polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX","GI","UM-DQ","UM-FQ","UM-JQ","UM-MQ","TV","UM-HQ"];
 
         // Configure series
         let polygonTemplate = polygonSeries.mapPolygons.template;
@@ -337,7 +337,7 @@ export default class Map extends Component {
     <div className="App">
         <DecadeInput handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} showData="true"/>
-        <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} ></CountryDetails>
+        <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} genre={this.genres}></CountryDetails>
         <div id="chartdiv" className="map-chart"></div>
     </div>)
     }
