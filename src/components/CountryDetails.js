@@ -65,9 +65,7 @@ function CountryDetails(props) {
       <th scope="row" key={key + Math.random()}>
         <div
           className="modal-genre-color"
-          style={{ backgroundColor: element[1] }}
-        >
-          {" "}
+          style={{ backgroundColor: element[1] }}>
         </div>
       </th>
       <th scope="row" key={key + Math.random()}>
@@ -77,7 +75,7 @@ function CountryDetails(props) {
         {genres[key]}
       </th>
       <th scope="row" key={key + Math.random()}>
-        {percentage[key]}
+        {percentage[key]} %
       </th>
       <th scope="row" key={key + Math.random()}>
         Albums
