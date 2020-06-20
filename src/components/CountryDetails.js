@@ -57,7 +57,7 @@ function CountryDetails(props) {
   }
 
   // console.log(data[0]);
-  console.log(nbrAlbums)
+  console.log(props.isactive)
 
   // Print the table of Most produced genres
   let tablePrint = colors.map((element, key) => (
@@ -82,16 +82,17 @@ function CountryDetails(props) {
       </th>
     </tr>
   ))
+  
 
   return (
-    <>
+    <div className={props.isactive ? null : "hidden"}>
       <div className="map-breadcrumb">
-        <h1 hidden={country ? false : true} style={{ color: "white" }}>
+        <h1 style={{ color: "white" }}>
           {country} in {decade}
         </h1>
       </div>
       <div className="country-modal">
-        <img className="close-modal" src={closeButton} alt="close" />
+        <img className="close-modal" onClick={props.closemodal} src={closeButton} alt="close" />
         <h1>MOST PRODUCED GENRES</h1>
         <h3>• Number of produced albums</h3>
         <div className="product-albums-container">
@@ -113,7 +114,7 @@ function CountryDetails(props) {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   )
 }
 

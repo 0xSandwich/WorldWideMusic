@@ -126,7 +126,9 @@ export default class Map extends Component {
 
         // Fill country by genre color
         polygon.fill= this.maxGenre
-        this.prevPolygon = polygon=
+        this.prevPolygon = polygon
+
+        console.log(this.countryclicked)
 
         this.pieSeries.show();
         this.pieChart.show();
@@ -154,6 +156,8 @@ export default class Map extends Component {
         this.forceUpdate()
         polygon.toFront();
         polygon.strokeOpacity = 0; // hide stroke for lines not to cross countries
+
+        this.fadeOut(polygon)
     
         polygon.defaultState.properties.fillOpacity = 1;
         polygon.animate({ property: "fillOpacity", to: 1 }, animationDuration);
@@ -180,16 +184,22 @@ export default class Map extends Component {
         }
     }
     // Fade out all countries except selected
-    fadeOut = (exceptPolygon) => {
+    fadeOut = (exceptPolygon, isreset) => {
         for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
             var polygon = this.mapSeries.mapPolygons.getIndex(i);
-            if (polygon !== exceptPolygon) {
-                polygon.defaultState.properties.fillOpacity = 0.5;
-                polygon.animate([{ property: "fillOpacity", to: 0.5 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
+            if(isreset){
+                polygon.defaultState.properties.fillOpacity = 1;
+                polygon.animate([{ property: "fillOpacity", to: 1 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
             }
-            else{
-                polygon.defaultState.properties.fillOpacity = 0;
-                polygon.animate([{ property: "fillOpacity", to: 0 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
+            else {
+                if (polygon !== exceptPolygon) {
+                    polygon.defaultState.properties.fillOpacity = 0.5;
+                    polygon.animate([{ property: "fillOpacity", to: 0.5 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
+                }
+                else{
+                    polygon.defaultState.properties.fillOpacity = 0;
+                    polygon.animate([{ property: "fillOpacity", to: 0 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
+                }
             }
         }
     }
@@ -282,8 +292,9 @@ export default class Map extends Component {
         sliceTemplate.fillOpacity = 1
         sliceTemplate.strokeWidth=0;
         sliceTemplate.tooltipText = "{category}: {value.value} / {value.percent} %";
-        sliceTemplate.events.on("over",function(){
+        sliceTemplate.events.on("hit",function(e){
             console.log('ok')
+            console.log(e.target.dataItem.dataContext.category)
         })
         
         // Remove default animation
@@ -338,7 +349,21 @@ export default class Map extends Component {
     handleNav = (target) =>{
         this.curDecade = target
         this.forceUpdate()
-
+    }
+    closeModal(){
+        this.countryclicked=false
+        console.log(this.countryclicked)
+        this.forceUpdate()
+        this.zoomOut()
+    }
+    zoomOut = () => {
+        if (this.morphedPolygon) {
+            this.pieSeries.hide();
+            this.morphBack();
+            this.fadeOut(null, true);
+            this.morphedPolygon = undefined;
+            this.prevPolygon.fill=am4core.color("#514E61")
+        }
     }
     
     render(){
@@ -346,8 +371,8 @@ export default class Map extends Component {
     <div className="App">
         <DecadeInput handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} showData="true"/>
-        <CountryDetails className={this.countryclicked ? "active" : null} data={this.albumData} genre={this.genres}></CountryDetails>
-        <div id="chartdiv" className="map-chart"></div>
+        <CountryDetails isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
+        <div id="chartdiv" className="map-chart" ></div>
     </div>)
     }
 }

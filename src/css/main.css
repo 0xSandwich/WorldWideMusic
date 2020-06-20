@@ -330,4 +330,7 @@ COUNTRY DETAILS
     .country-modal table tbody.genres-container th.albums {
       width: 5%; }
 
+.hidden {
+  display: none; }
+
 /*# sourceMappingURL=main.css.map */
