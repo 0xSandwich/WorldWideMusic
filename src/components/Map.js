@@ -282,6 +282,9 @@ export default class Map extends Component {
         sliceTemplate.fillOpacity = 1
         sliceTemplate.strokeWidth=0;
         sliceTemplate.tooltipText = "{category}: {value.value} / {value.percent} %";
+        sliceTemplate.events.on("over",function(){
+            console.log('ok')
+        })
         
         // Remove default animation
         pieSeries.slices.template.states.getKey("hover").properties.scale = 1;

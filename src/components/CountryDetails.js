@@ -100,12 +100,12 @@ function CountryDetails(props) {
         </div>
         <h3>• Most produced genres</h3>
         <table>
-          <div class="line-separator"></div>
+          <div className="line-separator"></div>
           <tbody className="genres-container">
             <tr>
-              <th class="type-colors" scope="col"></th>
-              <th class="music-type" scope="col"></th>
-              <th class="music-value" scope="col"></th>
+              <th className="type-colors" scope="col"></th>
+              <th className="music-type" scope="col"></th>
+              <th className="music-value" scope="col"></th>
               <th scope="col"></th>
               <th className="albums" scope="col"></th>
             </tr>
