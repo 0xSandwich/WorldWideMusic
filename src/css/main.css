@@ -120,12 +120,12 @@ MAP
 .legend-home .map-legend {
   list-style: none;
   position: absolute;
-  right: 50px;
+  left: 150px;
   z-index: 10;
   width: 50vw;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex-wrap: wrap;
   bottom: 60px; }
   .legend-home .map-legend .map-legend-item {
