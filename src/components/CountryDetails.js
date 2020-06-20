@@ -101,7 +101,7 @@ function CountryDetails(props) {
         </div>
         <h3>• Most produced genres</h3>
         <table>
-          <div className="line-separator"></div>
+          <thead className="line-separator"></thead>
           <tbody className="genres-container">
             <tr>
               <th className="type-colors" scope="col"></th>
