@@ -62,12 +62,10 @@ export default class Map extends Component {
                     [this.hoverGenre[0].rock,genderColors.rock,"rock"]
                 ]
                 let max = 0
-                let maxgenre = 0
                 let maxcolor = 0
                 values.forEach(element => {
                     if (element[0] > max){
                         max = element[0]
-                        maxgenre = element[2]
                         maxcolor = element[1]
                     }
                     else {
@@ -101,7 +99,7 @@ export default class Map extends Component {
         ]
         polygon.polygon.measure();
         let radius = 70;
-        let innerRadius = 30;
+        let innerRadius = 50;
         this.pieChart.width = radius * 2;
         this.pieChart.height = radius * 2;
         this.pieChart.innerRadius=innerRadius
@@ -184,9 +182,9 @@ export default class Map extends Component {
     }
     // Fade out all countries except selected
     fadeOut = (exceptPolygon, isreset) => {
-        for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+        for (let i = 0; i < this.mapSeries.mapPolygons.length; i++) {
             
-            var polygon = this.mapSeries.mapPolygons.getIndex(i);
+            let polygon = this.mapSeries.mapPolygons.getIndex(i);
             // console.log(polygon.dataItem.dataContext.id)
             if(isreset){
                 polygon.defaultState.properties.fillOpacity = 1;
@@ -212,13 +210,13 @@ export default class Map extends Component {
         chart.useGeodata=true
         chart.projection = new am4maps.projections.Miller();
         chart.logo.disabled=true
-        chart.seriesContainer.draggable = false;
+        chart.seriesContainer.draggable = true;
         chart.seriesContainer.resizable = false;
         chart.seriesContainer.events.disableType("doublehit");
         chart.chartContainer.background.events.disableType("doublehit");
 
         // Create series
-        let polygonSeries = new am4maps.MapPolygonSeries();
+        let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
         polygonSeries.useGeodata = true;
         chart.series.push(polygonSeries);
 
@@ -243,13 +241,11 @@ export default class Map extends Component {
         },this)
         polygonTemplate.events.on("out",function(event){
             setTimeout(()=>{
-                if(this.prevPolygon != event.target){
+                if(this.prevPolygon !== event.target){
                     event.target.fill=am4core.color('#514E61')
                 }
             },500)
         },this)
-
-        
         
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
@@ -321,10 +317,57 @@ export default class Map extends Component {
         labelTemplate.background.fill = am4core.color("#FFFFFF");
         pieSeries.labels.template.text = "{value.value}";
         pieSeries.labels.template.hide()
-
-        
         this.pieSeries = pieSeries
         this.pieChart = pieChart
+    } // Comp did mount
+    showAll = () => {
+        this.closeModal()
+        for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+            let polygon = this.mapSeries.mapPolygons.getIndex(i);
+            let country = countryTag[polygon.dataItem.dataContext.id]
+            let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
+            fetch(query)
+            .then(response => response.json())
+            .then(({data})=> {
+                this.hoverGenre = data
+                if(this.hoverGenre.length<1){
+                    // Error handling
+                    this.hoverGenre = "err"
+                }
+                else{
+                    let values=[
+                        [this.hoverGenre[0].blues,genderColors.blues,"blues"],
+                        [this.hoverGenre[0].classical,genderColors.classical,"classical"],
+                        [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
+                        [this.hoverGenre[0].folk,genderColors.folk,"folk"],
+                        [this.hoverGenre[0].funk,genderColors.funk,"funk"],
+                        [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
+                        [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
+                        [this.hoverGenre[0].latin,genderColors.latin,"latin"],
+                        [this.hoverGenre[0].pop,genderColors.pop,"pop"],
+                        [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
+                        [this.hoverGenre[0].rock,genderColors.rock,"rock"]
+                    ]
+                    let max = 0
+                    let maxcolor = 0
+                    values.forEach(element => {
+                        if (element[0] > max){
+                            max = element[0]
+                            maxcolor = element[1]
+                        }
+                    });
+                    polygon.fill=am4core.color(maxcolor)
+                    console.log(maxcolor)
+                }
+            })
+            .catch(err => console.log(err));
+            console.log(polygon.dataItem.dataContext.id)
+        }
+        
+    }
+    nextDecade = () =>{
+        this.curDecade = this.curDecade+10
+        this.showAll()
     }
     hideSmall = (slices) => {
         let allNull = false
@@ -359,6 +402,7 @@ export default class Map extends Component {
         console.log(this.countryclicked)
         this.forceUpdate()
         this.zoomOut()
+        this.map.goHome()
     }
     zoomOut = () => {
         if (this.morphedPolygon) {
@@ -366,16 +410,16 @@ export default class Map extends Component {
             this.morphBack();
             this.fadeOut(null, true);
             this.morphedPolygon = undefined;
-            this.prevPolygon.fill=am4core.color("#514E61")
+            setTimeout(()=>{this.prevPolygon.fill=am4core.color("#514E61")},100)
         }
     }
     
     render(){
     return (
     <div className="App">
-        <DecadeInput handleNav={this.handleNav} />
-        <MapLegend legendClass="legend-home" data={this.albumData} showData="true"/>
-        <CountryDetails isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
+        <DecadeInput nextdecade={this.nextDecade} showall={this.showAll} handleNav={this.handleNav} />
+        <MapLegend legendClass="legend-home" data={this.albumData} />
+        <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
     </div>)
     }

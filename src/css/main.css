@@ -143,6 +143,7 @@ MAP
 
 .decade-input {
   position: absolute;
+  top: 50%;
   z-index: 12; }
 
 .modal {

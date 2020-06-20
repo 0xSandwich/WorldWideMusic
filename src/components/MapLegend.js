@@ -13,9 +13,9 @@ function MapLegend(props) {
             data.push([
                 element[0],
                 element[1],
-                gender[element[0]]
-                
+                gender[element[0]]  
             ])
+            return null
         })
     }
     let listItems = data.map((element, key) =>
