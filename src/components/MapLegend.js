@@ -21,7 +21,7 @@ function MapLegend(props) {
     let listItems = data.map((element, key) =>
         <li className="map-legend-item" key={key}>
             <div className="map-legend-color" style={{backgroundColor: element[1]}}></div>
-            {element[0]} : {(element.length>2 && props.showData) ? element[2] : null}
+            {element[0]} {(element.length>2 && props.showData) ? ": "+element[2] : null} 
         </li>
     );
     return (
