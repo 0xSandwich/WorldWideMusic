@@ -74,6 +74,7 @@ export default class Map extends Component {
                         
                     }
                 });
+
                 target.fill=am4core.color(maxcolor)
                 this.maxGenre = maxcolor
             }
@@ -127,8 +128,6 @@ export default class Map extends Component {
         // Fill country by genre color
         polygon.fill= this.maxGenre
         this.prevPolygon = polygon
-
-        console.log(this.countryclicked)
 
         this.pieSeries.show();
         this.pieChart.show();
@@ -186,7 +185,9 @@ export default class Map extends Component {
     // Fade out all countries except selected
     fadeOut = (exceptPolygon, isreset) => {
         for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+            
             var polygon = this.mapSeries.mapPolygons.getIndex(i);
+            // console.log(polygon.dataItem.dataContext.id)
             if(isreset){
                 polygon.defaultState.properties.fillOpacity = 1;
                 polygon.animate([{ property: "fillOpacity", to: 1 }, { property: "strokeOpacity", to: 1 }], polygon.polygon.morpher.morphDuration);
@@ -239,13 +240,16 @@ export default class Map extends Component {
         
         polygonTemplate.events.on("over",function(event){
             this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
-            this.hover=true
-        }.bind(this))
+        },this)
         polygonTemplate.events.on("out",function(event){
             setTimeout(()=>{
-                event.target.fill=am4core.color('#514E61')
+                if(this.prevPolygon != event.target){
+                    event.target.fill=am4core.color('#514E61')
+                }
             },500)
-        }.bind(this))
+        },this)
+
+        
         
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
