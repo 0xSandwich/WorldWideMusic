@@ -65,8 +65,8 @@ function CountryDetails(props) {
       <th scope="row" key={key + Math.random()}>
         <div
           className="modal-genre-color"
-          style={{ backgroundColor: element[1] }}>
-        </div>
+          style={{ backgroundColor: element[1] }}
+        ></div>
       </th>
       <th scope="row" key={key + Math.random()}>
         {genresName[key]}
@@ -82,13 +82,27 @@ function CountryDetails(props) {
       </th>
     </tr>
   ))
-  
 
   return (
     <div className={props.isactive ? null : "hidden"}>
       <div className="country-modal">
-        <img className="close-modal" onClick={props.closemodal} src={closeButton} alt="close" />
-        <h1>{country} in {decade}</h1>
+        <div className="modal-menu">
+          <div className="modal-menu-item active">
+            <h1>DATA</h1>
+          </div>
+          <div className="modal-menu-item">
+            <h1>charts</h1>
+          </div>
+        </div>
+        <img
+          className="close-modal"
+          onClick={props.closemodal}
+          src={closeButton}
+          alt="close"
+        />
+        <h1>
+          {country} in {decade}
+        </h1>
         <h3>• Number of produced albums</h3>
         <div className="product-albums-container">
           <img src={productAlbums} alt="productAlbums" />
