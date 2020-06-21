@@ -31,7 +31,7 @@ function About() {
 
         <h1>team</h1>
         {/* LUCIEN */}
-        <p><span>Lucien Chotard</span> - Front-end Developper</p>
+        <p><span>Lucien Chotard</span> - Back-end Developper</p>
         <div className="social-container">
           <a href="https://twitter.com/ChotardLucien" target="_blank"><img className="twitter" src={twitter} alt="twitter"></img></a>
           <a href="https://www.linkedin.com/in/lucien-chotard/" target="_blank"><img className="linkedin" src={linkedin} alt="linkedin"></img></a>
