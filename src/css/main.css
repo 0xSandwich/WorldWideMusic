@@ -97,27 +97,29 @@ MAP
   z-index: 10;
   position: absolute;
   width: 100vw;
-  top: 28px;
+  top: 11px;
   height: 20vh;
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center; }
   .map-breadcrumb h1 {
     position: relative;
-    width: fit-content; }
+    width: fit-content;
+    font-size: 18px; }
     .map-breadcrumb h1:before {
       position: absolute;
       content: "";
-      top: 14px;
-      left: -120px;
-      width: 100px;
+      top: 12px;
+      left: -80px;
+      width: 60px;
       border: solid 0.5px rgba(255, 255, 255, 0.5); }
     .map-breadcrumb h1:after {
       position: absolute;
       content: "";
-      top: 14px;
+      top: 12px;
       margin-left: 10px;
-      width: 100px;
+      width: 60px;
       border: solid 0.5px rgba(255, 255, 255, 0.5); }
 
 .legend-home .map-legend {
