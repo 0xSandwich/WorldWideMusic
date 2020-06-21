@@ -110,6 +110,12 @@ export default class Map extends Component {
     
         this.pieChart.x = centerPoint.x - radius;
         this.pieChart.y = centerPoint.y - radius;
+
+        if(polygon.dataItem.dataContext.id === "US"){
+            console.log('US')
+            this.pieChart.x = 300
+            this.pieChart.y = 350
+        }
     
         let fill = polygon.fill;
     
@@ -211,7 +217,7 @@ export default class Map extends Component {
         chart.projection = new am4maps.projections.Miller();
         chart.logo.disabled=true
         chart.seriesContainer.draggable = true;
-        chart.seriesContainer.resizable = false;
+        chart.seriesContainer.resizable = true;
         chart.seriesContainer.events.disableType("doublehit");
         chart.chartContainer.background.events.disableType("doublehit");
 
@@ -230,6 +236,31 @@ export default class Map extends Component {
         polygonTemplate.strokeOpacity=0
         polygonTemplate.fill = am4core.color("#514E61");
         this.polygonTemplate = polygonTemplate
+        polygonSeries.data = [{
+            "id": "NZ",
+            "zoomLevel": 12,
+            "zoomGeoPoint": {
+              "latitude": -41,
+              "longitude": 173
+            }
+          }, {
+            "id": "RU",
+            "zoomLevel": 2.5,
+            "zoomGeoPoint": {
+              "latitude": 62,
+              "longitude": 96
+            }
+          }, {
+            "id": "US",
+            "zoomLevel": 2.5,
+            "zoomGeoPoint": {
+              "latitude": 38,
+              "longitude": -101
+            }
+          }];
+          
+          polygonSeries.dataFields.zoomLevel = "zoomLevel";
+          polygonSeries.dataFields.zoomGeoPoint = "zoomGeoPoint";
 
         // desaturate filter for countries
         var desaturateFilter = new am4core.DesaturateFilter();
@@ -286,7 +317,7 @@ export default class Map extends Component {
         // Chart styling
         var dropShadowFilter = new am4core.DropShadowFilter();
         dropShadowFilter.blur = 4;
-        pieSeries.filters.push(dropShadowFilter);
+        pieSeries.filters.push(dropShadowFilter); 
 
         var sliceTemplate = pieSeries.slices.template;
         sliceTemplate.fillOpacity = 1
@@ -417,6 +448,11 @@ export default class Map extends Component {
     render(){
     return (
     <div className="App">
+        <div className="map-breadcrumb">
+            <h1 style={{ color: "white" }}>
+            MUSIC GENRES ACROSS THE WORLD
+            </h1>
+        </div>
         <DecadeInput nextdecade={this.nextDecade} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
         <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
