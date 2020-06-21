@@ -134,31 +134,29 @@ MAP
   position: absolute;
   // background-color:red;
   width: 100vw;
-  top: 11px;
+  top: 28px;
   height: 20vh;
-  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
   h1 {
     position: relative;
     width: fit-content;
-    font-size: 18px;
     // margin: 0 auto;
     &:before {
       position: absolute;
       content: "";
-      top: 12px;
-      left: -80px;
-      width: 60px;
+      top: 14px;
+      left: -120px;
+      width: 100px;
       border: solid 0.5px rgba(255, 255, 255, 0.5);
     }
     &:after {
       position: absolute;
       content: "";
-      top: 12px;
+      top: 14px;
       margin-left: 10px;
-      width: 60px;
+      width: 100px;
       border: solid 0.5px rgba(255, 255, 255, 0.5);
     }
   }
