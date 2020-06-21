@@ -73,7 +73,12 @@ export default class Map extends Component {
                     }
                 });
 
-                target.fill=am4core.color(maxcolor)
+                if(maxcolor !== 0){
+                    target.fill=am4core.color(maxcolor)
+                }
+                else{
+                    target.fill=am4core.color("#514E61")
+                }
                 this.maxGenre = maxcolor
             }
         })
@@ -381,13 +386,19 @@ export default class Map extends Component {
                     ]
                     let max = 0
                     let maxcolor = 0
+                    
                     values.forEach(element => {
                         if (element[0] > max){
                             max = element[0]
                             maxcolor = element[1]
                         }
                     });
-                    polygon.fill=am4core.color(maxcolor)
+                    if(maxcolor !== 0){
+                        polygon.fill=am4core.color(maxcolor)
+                    }
+                    else{
+                        polygon.fill=am4core.color("#514E61")
+                    }
                     console.log(maxcolor)
                 }
             })
