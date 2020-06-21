@@ -175,19 +175,18 @@ MAP
     left: 150px;
     // background-color: #00000020;
     z-index: 10;
-    width: 50vw;
+    width: 45vw;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
-    bottom: 60px;
+    bottom: 50px;
     .map-legend-item {
       text-transform: capitalize;
       display: flex;
-
       align-items: center;
-      width: 180px;
-      margin: 10px 0px 10px 0px;
+      width: 170px;
+      margin: 8px 0px 8px 0px;
       .map-legend-color {
         width: 15px;
         height: 15px;
