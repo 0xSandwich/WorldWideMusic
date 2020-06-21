@@ -232,7 +232,7 @@ export default class Map extends Component {
         chart.series.push(polygonSeries);
 
         // Exclude countries
-        polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","VA","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CZ","CX","CC","BL","BI","TF","AX","GI","UM-DQ","UM-FQ","UM-JQ","UM-MQ","TV","UM-HQ"];
+        polygonSeries.exclude = ["AQ","BV","GO","JU","BQ","WF","PS","TK","SZ","PM","SH","GS","EH","PN","SJ","NU","MF","XK","KI","IO","HM","CX","CC","BL","BI","TF","AX","UM-DQ","UM-FQ","UM-JQ","UM-MQ","TV","UM-HQ"];
 
         // Configure series
         let polygonTemplate = polygonSeries.mapPolygons.template;
