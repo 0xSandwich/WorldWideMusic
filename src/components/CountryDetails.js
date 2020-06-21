@@ -86,14 +86,9 @@ function CountryDetails(props) {
 
   return (
     <div className={props.isactive ? null : "hidden"}>
-      <div className="map-breadcrumb">
-        <h1 style={{ color: "white" }}>
-          {country} in {decade}
-        </h1>
-      </div>
       <div className="country-modal">
         <img className="close-modal" onClick={props.closemodal} src={closeButton} alt="close" />
-        <h1>MOST PRODUCED GENRES</h1>
+        <h1>{country} in {decade}</h1>
         <h3>• Number of produced albums</h3>
         <div className="product-albums-container">
           <img src={productAlbums} alt="productAlbums" />
