@@ -12,7 +12,7 @@
 @font-face {
   font-family: "Europa-Regular";
   src: url("../assets/fonts/Europa-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Europa-Regular.woff") format("woff");
+  url("../assets/fonts/Europa-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -29,6 +29,7 @@ $main-color: #5855ff;
   padding: 0;
   box-sizing: border-box;
   font-family: "Europa-Regular";
+  overflow-x: hidden !important;
   &::-webkit-scrollbar {
     display: none;
   }

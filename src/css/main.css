@@ -14,7 +14,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Europa-Regular"; }
+  font-family: "Europa-Regular";
+  overflow-x: hidden !important; }
   *::-webkit-scrollbar {
     display: none; }
   *::-moz-scrollbar {
