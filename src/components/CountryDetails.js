@@ -48,7 +48,8 @@ function CountryDetails(props) {
 
     // Create array and calc percentage of all styles
     genres.map((element, key) =>
-      percentage.push(Math.round((element / nbrAlbums) * 100))
+      // Handle NaN percentage issues
+      nbrAlbums == 0 ? percentage.push(0) : percentage.push(Math.round((element / nbrAlbums) * 100))
     )
 
     // Sort by percent
