@@ -31,7 +31,7 @@ function About() {
 
         <h1>team</h1>
         {/* LUCIEN */}
-        <p><span>Lucien Chotard</span> - Front-end Developper</p>
+        <p><span>Lucien Chotard</span> - Back/Front-end Developper</p>
         <div className="social-container">
           <a href="https://twitter.com/ChotardLucien" target="_blank"><img className="twitter" src={twitter} alt="twitter"></img></a>
           <a href="https://www.linkedin.com/in/lucien-chotard/" target="_blank"><img className="linkedin" src={linkedin} alt="linkedin"></img></a>
@@ -54,7 +54,7 @@ function About() {
         </div>
 
         {/* Cathy */}
-        <p><a href="https://cathydolle.com/" target="_blank">Cathy Dolle</a> - UI/UX Designer | Front-end Developper</p>
+        <p><a href="https://cathydolle.com/" target="_blank">Cathy Dolle</a> - Front-end Developper | UI/UX Designer</p>
         <div className="social-container">
           <a href="https://cathydolle.com/" target="_blank"><img className="folio" src={folio} alt="folio"></img></a>
           <a href="https://twitter.com/cathydolle" target="_blank"><img className="twitter" src={twitter} alt="twitter"></img></a>
