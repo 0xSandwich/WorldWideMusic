@@ -200,7 +200,7 @@ MAP
         cursor: pointer;
         width: 30px;
         margin-right: 10px;
-        opacity: 0.5; }
+        opacity: 0.2; }
       .date-container .controls-item img.active {
         opacity: 1; }
       .date-container .controls-item img:hover {

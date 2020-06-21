@@ -18,7 +18,7 @@ export class decadeInput extends Component {
                     <li className={this.props.curdecade == 2020 ? "active" : null} onClick={()=>{this.props.handleNav(2020)}}>2020's</li>
                 </ul>
                 <div className="controls">
-                    <p>Watch colors</p>
+                    <p>Map chart</p>
                     <div className="controls-item">
                         <img onClick={this.props.showall} src={eye} alt="view" />
                         <img className="active" onClick={this.props.showall} src={eyeClose} alt="view" />
