@@ -172,13 +172,13 @@ MAP
   .map-legend {
     list-style: none;
     position: absolute;
-    left: 150px;
+    right: -40px;
     // background-color: #00000020;
     z-index: 10;
     width: 45vw;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-end;
     flex-wrap: wrap;
     bottom: 50px;
     .map-legend-item {
@@ -198,19 +198,24 @@ MAP
   }
 }
 .date-container {
+  z-index: 1000;
+  padding-bottom: 60px;
   pointer-events: none;
   position: absolute;
   height: 100vh;
+  left: 60px;
   width: 20vw;
+  bottom: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+  list-style: none;
   .decade-input {
     padding-left: 15px;
-    position: absolute;
-    height: 50vh;
-    left: 150px;
-    z-index: 12;
     list-style: none;
+    height: 40vh;
+    z-index: 12;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -219,16 +224,44 @@ MAP
       pointer-events: fill;
       color: rgba(255, 255, 255, 0.5);
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       transition-duration: 1s;
     }
     li.active {
       color: white;
-      font-size: 28px;
+      font-size: 24px;
     }
     li:hover {
       color: white;
       transition-duration: 0.5s;
+    }
+  }
+  p {
+    margin-top: 20px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .controls {
+    margin-top: 50px;
+    width: 100vw;
+    left: 60px;
+    &-item {
+      display: flex;
+      flex-direction: row;
+      img {
+        pointer-events: fill;
+        cursor: pointer;
+        width: 30px;
+        margin-right: 10px;
+        opacity: 0.5;
+      }
+      img.active{
+        opacity: 1;
+      }
+      img:hover{
+        opacity: 1;
+        transition-duration: 0.5s;
+      }
     }
   }
 }
@@ -516,11 +549,11 @@ COUNTRY DETAILS
 
 // ANIMATIONS
 
-@keyframes fade{
-  0%{
+@keyframes fade {
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
