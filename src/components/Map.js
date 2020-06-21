@@ -453,7 +453,7 @@ export default class Map extends Component {
             MUSIC GENRES ACROSS THE WORLD
             </h1>
         </div>
-        <DecadeInput nextdecade={this.nextDecade} showall={this.showAll} handleNav={this.handleNav} />
+        <DecadeInput curdecade={this.curDecade} nextdecade={this.nextDecade} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
         <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
