@@ -383,7 +383,8 @@ ABOUT PAGE
     align-items: center;
     width: 100vw;
     padding-top: 15vh;
-    padding-bottom: 22vh; }
+    padding-bottom: 22vh;
+    overflow-x: visible !important; }
     .about-container .video-container h1 {
       margin-bottom: 40px; }
     .about-container .video-container .wave {
