@@ -5,7 +5,7 @@ import logo from "../assets/images/logo.svg"
 function Header() {
   return (
     <header>
-      <img id="header-logo" src={logo} alt="header-logo" />
+      <NavLink to="/home"><img id="header-logo" src={logo} alt="header-logo" /></NavLink>
       <nav>
         <ul>
           <li>

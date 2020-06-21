@@ -87,19 +87,23 @@ HEADER
 header {
   position: absolute;
   // background-color: red;
-  height: 20vh;
+  pointer-events: none;
   width: 100vw;
   padding: 20px 150px 0px 150px;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  img {
+    pointer-events: auto;
+  }
   nav ul {
     display: flex;
     list-style: none;
     li a {
       color: $link-inactive-color;
       margin-left: 20px;
+      pointer-events: fill;
     }
     li a.active {
       color: white;
@@ -191,7 +195,7 @@ MAP
 
 .decade-input {
   position: absolute;
-  top:50%;
+  top: 50%;
   z-index: 12;
 }
 
@@ -373,7 +377,7 @@ COUNTRY DETAILS
     border-radius: 100%;
     margin-right: 10px;
   }
-  h1{
+  h1 {
     width: 90%;
     font-size: 28px;
     line-height: 40px;
@@ -426,6 +430,6 @@ COUNTRY DETAILS
     }
   }
 }
-.hidden{
+.hidden {
   display: none;
 }
