@@ -317,7 +317,6 @@ COUNTRY DETAILS
   position: absolute;
   bottom: 0;
   right: 70px;
-  height: 78vh;
   width: 30vw;
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
@@ -377,6 +376,7 @@ COUNTRY DETAILS
       height: 50px;
       margin-right: 10px; }
   .country-modal table {
+    margin-bottom: 30px;
     width: 100%; }
     .country-modal table .line-separator {
       position: absolute;
@@ -384,19 +384,21 @@ COUNTRY DETAILS
       height: 280px;
       margin-top: 8px;
       border-left: 0.5px solid rgba(255, 255, 255, 0.3); }
-    .country-modal table tbody.genres-container tr th {
-      color: white;
-      text-align: left;
-      line-height: 24px;
-      font-size: 14px; }
-    .country-modal table tbody.genres-container th.type-colors {
-      width: 5%; }
-    .country-modal table tbody.genres-container th.music-type {
-      width: 33%; }
-    .country-modal table tbody.genres-container th.music-value {
-      width: 15%; }
-    .country-modal table tbody.genres-container th.albums {
-      width: 5%; }
+    .country-modal table tbody.genres-container {
+      margin-bottom: 40px; }
+      .country-modal table tbody.genres-container tr th {
+        color: white;
+        text-align: left;
+        line-height: 24px;
+        font-size: 14px; }
+      .country-modal table tbody.genres-container th.type-colors {
+        width: 5%; }
+      .country-modal table tbody.genres-container th.music-type {
+        width: 33%; }
+      .country-modal table tbody.genres-container th.music-value {
+        width: 15%; }
+      .country-modal table tbody.genres-container th.albums {
+        width: 5%; }
 
 .hidden {
   display: none; }
