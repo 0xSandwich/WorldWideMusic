@@ -255,10 +255,10 @@ MAP
         margin-right: 10px;
         opacity: 0.2;
       }
-      img.active{
+      img.active {
         opacity: 1;
       }
-      img:hover{
+      img:hover {
         opacity: 1;
         transition-duration: 0.5s;
       }
@@ -324,38 +324,6 @@ HOME PAGE
   .start-button:hover {
     background: #6f6af1;
   }
-  .wave {
-    position: absolute;
-    width: 100%;
-    height: 140px;
-    bottom: 0;
-    left: 0;
-    background: url("../assets/images/wave.svg");
-    animation: wave-animation 10s linear infinite;
-  }
-  .wave:before {
-    content: "";
-    width: 100%;
-    height: 140px;
-    background: url("../assets/images/wave.svg");
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.4;
-    animation: wave-animation-reverse 10s linear infinite;
-  }
-  .wave:after {
-    content: "";
-    width: 100%;
-    height: 140px;
-    background: url("../assets/images/wave.svg");
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.6;
-    animation-delay: 5s;
-    animation: wave-animation 20s linear infinite;
-  }
   .map {
     width: 80%;
     height: 100%;
@@ -365,6 +333,41 @@ HOME PAGE
   }
 }
 
+
+// WAVE
+
+.wave {
+  position: absolute;
+  width: 100%;
+  height: 140px;
+  bottom: 0;
+  left: 0;
+  background: url("../assets/images/wave.svg");
+  animation: wave-animation 10s linear infinite;
+}
+.wave:before {
+  content: "";
+  width: 100%;
+  height: 140px;
+  background: url("../assets/images/wave.svg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+  animation: wave-animation-reverse 10s linear infinite;
+}
+.wave:after {
+  content: "";
+  width: 100%;
+  height: 140px;
+  background: url("../assets/images/wave.svg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  animation-delay: 5s;
+  animation: wave-animation 20s linear infinite;
+}
 // ANIMATIONS
 
 @keyframes wave-animation {
@@ -395,30 +398,102 @@ ABOUT PAGE
   position: relative;
   width: 100vw;
   height: 100vh;
-  padding: 20vh 150px 5vh 150px;
+  padding: 0 150px 0 150px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   animation-name: fade;
   animation-duration: 2s;
   animation-fill-mode: forwards;
+  &-bloc {
+    margin-top: 20vh;
+    padding-right: 150px;
+    width: 50%;
+    // height: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .right {
+    position: relative;
+    padding-left: 150px;
+    p {
+      margin-bottom: 5px;
+    }
+    span {
+      color: white;
+    }
+    .social-container {
+      margin-bottom: 15px;
+      width: 100%;
+      img {
+        cursor: pointer;
+        opacity: 0.2;
+        width: 24px;
+        margin-right: 10px;
+      }
+      img:hover {
+        opacity: 1;
+        transition-duration: 0.5s;
+      }
+    }
+  }
+  .right::before {
+    left: 0px;
+    position: absolute;
+    height: 84%;
+    content: " ";
+    border-left: 0.5px rgba(170, 170, 170, 0.5) solid;
+  }
   p {
-    width: 50vw;
-    margin-bottom: 50px;
     margin-left: 0px;
+    a {
+      text-transform: initial;
+      letter-spacing: 0px;
+    }
+    a:hover {
+      color: $main-color;
+      transition-duration: 0.5s;
+      cursor: pointer;
+    }
   }
   .map {
     position: absolute;
-    right: 0;
     z-index: -10;
-    opacity: 0.2;
-    height: 70%;
+    padding: 50px;
+    opacity: 0.1;
+    height: 100%;
+  }
+  .video-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    padding-top: 15vh;
+    padding-bottom: 22vh;
+    h1 {
+      margin-bottom: 40px;
+    }
+    .wave{
+      width: 100vw;
+      margin: 0px -150px 0px -150px;
+    }
   }
   video {
+    width: 70%;
     margin-left: 0px;
     outline: none;
     cursor: pointer;
+  }
+  h1 {
+    margin-bottom: 30px;
+  }
+  h1.disclaimer {
+    margin-top: 100px;
   }
 }
 
