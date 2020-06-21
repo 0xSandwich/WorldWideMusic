@@ -17,6 +17,10 @@
   font-family: "Europa-Regular"; }
   *::-webkit-scrollbar {
     display: none; }
+  *::-moz-scrollbar {
+    display: none; }
+  *::-ms-scrollbar {
+    display: none; }
 
 body {
   background: #221f2e;
@@ -321,7 +325,8 @@ ABOUT PAGE
   align-items: center;
   animation-name: fade;
   animation-duration: 2s;
-  animation-fill-mode: forwards; }
+  animation-fill-mode: forwards;
+  overflow-x: hidden; }
   .about-container-bloc {
     margin-top: 20vh;
     padding-right: 150px;
