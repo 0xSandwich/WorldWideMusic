@@ -19,6 +19,8 @@ export default class Map extends Component {
     countryclicked=false
     hoverGenre=null
     prevPolygon={fill:null}
+    showAllEnabled = false
+    lockhover= false
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -122,6 +124,7 @@ export default class Map extends Component {
             this.pieChart.y = 350
         }
     
+
         let fill = polygon.fill;
     
         for (let i = 0; i < this.pieSeries.dataItems.length; i++) {
@@ -133,10 +136,11 @@ export default class Map extends Component {
                 1
             ));
         }
-
+        console.log(this.maxGenre)
         // Fill country by genre color
         polygon.fill= this.maxGenre
         this.prevPolygon = polygon
+        this.lockhover=false
 
         this.pieSeries.show();
         this.pieChart.show();
@@ -273,18 +277,27 @@ export default class Map extends Component {
         polygonTemplate.filters.push(desaturateFilter);
         
         polygonTemplate.events.on("over",function(event){
-            this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
+            console.log(this.lockhover)
+            if(this.showAllEnabled===false && this.lockhover === false){
+                this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
+            }
         },this)
         polygonTemplate.events.on("out",function(event){
             setTimeout(()=>{
-                if(this.prevPolygon !== event.target){
-                    event.target.fill=am4core.color('#514E61')
+                if(this.showAllEnabled===false && this.lockhover === false){
+                    if(this.prevPolygon !== event.target){
+                        event.target.fill=am4core.color('#514E61')
+                    }
                 }
             },500)
         },this)
         
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
+            if(this.showAllEnabled){
+                this.showAll()
+            }
+            this.lockhover=true
             // Requète pour obtenir les stats pour l'année / pays en cours
             this.getAlbum(countryTag[event.target.dataItem.dataContext.id],event.target)
         }.bind(this));
@@ -358,58 +371,65 @@ export default class Map extends Component {
     } // Comp did mount
     showAll = () => {
         this.closeModal()
-        for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
-            let polygon = this.mapSeries.mapPolygons.getIndex(i);
-            let country = countryTag[polygon.dataItem.dataContext.id]
-            let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
-            fetch(query)
-            .then(response => response.json())
-            .then(({data})=> {
-                this.hoverGenre = data
-                if(this.hoverGenre.length<1){
-                    // Error handling
-                    this.hoverGenre = "err"
-                }
-                else{
-                    let values=[
-                        [this.hoverGenre[0].blues,genderColors.blues,"blues"],
-                        [this.hoverGenre[0].classical,genderColors.classical,"classical"],
-                        [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
-                        [this.hoverGenre[0].folk,genderColors.folk,"folk"],
-                        [this.hoverGenre[0].funk,genderColors.funk,"funk"],
-                        [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
-                        [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
-                        [this.hoverGenre[0].latin,genderColors.latin,"latin"],
-                        [this.hoverGenre[0].pop,genderColors.pop,"pop"],
-                        [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
-                        [this.hoverGenre[0].rock,genderColors.rock,"rock"]
-                    ]
-                    let max = 0
-                    let maxcolor = 0
-                    
-                    values.forEach(element => {
-                        if (element[0] > max){
-                            max = element[0]
-                            maxcolor = element[1]
-                        }
-                    });
-                    if(maxcolor !== 0){
-                        polygon.fill=am4core.color(maxcolor)
+        if(this.showAllEnabled === true){
+            this.showAllEnabled=false
+            console.log("disable")
+            for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+                let polygon = this.mapSeries.mapPolygons.getIndex(i);
+                polygon.fill=am4core.color("#514E61")
+            }
+        }
+        else{
+            this.showAllEnabled=true
+            for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+                let polygon = this.mapSeries.mapPolygons.getIndex(i);
+                let country = countryTag[polygon.dataItem.dataContext.id]
+                let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
+                fetch(query)
+                .then(response => response.json())
+                .then(({data})=> {
+                    this.hoverGenre = data
+                    if(this.hoverGenre.length<1){
+                        // Error handling
+                        this.hoverGenre = "err"
                     }
                     else{
-                        polygon.fill=am4core.color("#514E61")
+                        let values=[
+                            [this.hoverGenre[0].blues,genderColors.blues,"blues"],
+                            [this.hoverGenre[0].classical,genderColors.classical,"classical"],
+                            [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
+                            [this.hoverGenre[0].folk,genderColors.folk,"folk"],
+                            [this.hoverGenre[0].funk,genderColors.funk,"funk"],
+                            [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
+                            [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
+                            [this.hoverGenre[0].latin,genderColors.latin,"latin"],
+                            [this.hoverGenre[0].pop,genderColors.pop,"pop"],
+                            [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
+                            [this.hoverGenre[0].rock,genderColors.rock,"rock"]
+                        ]
+                        let max = 0
+                        let maxcolor = 0
+                        
+                        values.forEach(element => {
+                            if (element[0] > max){
+                                max = element[0]
+                                maxcolor = element[1]
+                            }
+                        });
+                        if(maxcolor !== 0){
+                            polygon.fill=am4core.color(maxcolor)
+                        }
+                        else{
+                            polygon.fill=am4core.color("#514E61")
+                        }
+                        console.log(maxcolor)
                     }
-                    console.log(maxcolor)
-                }
-            })
-            .catch(err => console.log(err));
-            console.log(polygon.dataItem.dataContext.id)
+                })
+                .catch(err => console.log(err));
+                console.log(polygon.dataItem.dataContext.id)
+            }
         }
         
-    }
-    nextDecade = () =>{
-        this.curDecade = this.curDecade+10
-        this.showAll()
     }
     hideSmall = (slices) => {
         let allNull = false
@@ -436,8 +456,13 @@ export default class Map extends Component {
         }
     }
     handleNav = (target) =>{
+        this.closeModal()
         this.curDecade = target
         this.forceUpdate()
+        if(this.showAllEnabled){
+            this.showAllEnabled=false
+            this.showAll()
+        }
     }
     closeModal(){
         this.countryclicked=false
@@ -464,7 +489,7 @@ export default class Map extends Component {
             MUSIC GENRES ACROSS THE WORLD
             </h1>
         </div>
-        <DecadeInput curdecade={this.curDecade} nextdecade={this.nextDecade} showall={this.showAll} handleNav={this.handleNav} />
+        <DecadeInput curdecade={this.curDecade} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
         <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
