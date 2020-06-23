@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql')
-
+const fetch = require('cross-fetch')
 
 
 const connection = mysql.createConnection({
@@ -34,6 +34,18 @@ app.get('/getcountry', (req,res) =>{
             })
         }
     })
+})
+
+app.get('/getbestgenre',(req,res) => {
+    const {decade} = req.query
+    let query = `https://sandbox.matthieuvidal.fr/wwmserv/json.php?decade='${decade}'&type=object`
+    fetch(query)
+    .then(response => response.json())
+    .then((data)=> {
+        console.log(data)
+        return res.json(data)
+    })
+    .catch(err => console.log(err));
 })
 
 app.listen(4000,() => {

@@ -9,6 +9,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldHigh";
+import lodash from 'lodash'
 am4core.useTheme(am4themes_animated);
 
 export default class Map extends Component {
@@ -21,6 +22,7 @@ export default class Map extends Component {
     prevPolygon={fill:null}
     showAllEnabled = false
     lockhover= false
+    countryColors={}
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -35,53 +37,6 @@ export default class Map extends Component {
             else{
                 // Get current polygon
                 this.selectPolygon(target); 
-            }
-        })
-        .catch(err => console.log(err));
-    }
-    getBestGenre = (country,target) => {
-        let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
-        fetch(query)
-        .then(response => response.json())
-        .then(({data})=> {
-            this.hoverGenre = data
-            if(this.hoverGenre.length<1){
-                // Error handling
-                this.hoverGenre = "err"
-            }
-            else{
-                let values=[
-                    [this.hoverGenre[0].blues,genderColors.blues,"blues"],
-                    [this.hoverGenre[0].classical,genderColors.classical,"classical"],
-                    [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
-                    [this.hoverGenre[0].folk,genderColors.folk,"folk"],
-                    [this.hoverGenre[0].funk,genderColors.funk,"funk"],
-                    [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
-                    [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
-                    [this.hoverGenre[0].latin,genderColors.latin,"latin"],
-                    [this.hoverGenre[0].pop,genderColors.pop,"pop"],
-                    [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
-                    [this.hoverGenre[0].rock,genderColors.rock,"rock"]
-                ]
-                let max = 0
-                let maxcolor = 0
-                values.forEach(element => {
-                    if (element[0] > max){
-                        max = element[0]
-                        maxcolor = element[1]
-                    }
-                    else {
-                        
-                    }
-                });
-
-                if(maxcolor !== 0){
-                    target.fill=am4core.color(maxcolor)
-                }
-                else{
-                    target.fill=am4core.color("#514E61")
-                }
-                this.maxGenre = maxcolor
             }
         })
         .catch(err => console.log(err));
@@ -119,7 +74,7 @@ export default class Map extends Component {
         this.pieChart.y = centerPoint.y - radius;
 
         if(polygon.dataItem.dataContext.id === "US"){
-            console.log('US')
+            //US
             this.pieChart.x = 300
             this.pieChart.y = 350
         }
@@ -136,7 +91,6 @@ export default class Map extends Component {
                 1
             ));
         }
-        console.log(this.maxGenre)
         // Fill country by genre color
         polygon.fill= this.maxGenre
         this.prevPolygon = polygon
@@ -217,6 +171,30 @@ export default class Map extends Component {
             }
         }
     }
+    init =() =>{
+        this.countryColors={}
+        let query = "http://localhost:4000/getbestgenre?decade="+this.curDecade
+        fetch(query)
+        .then(response => response.json())
+        .then((data)=> { // ici tu destructures donc c'est normal que ca renvoie undefined
+            for(let j=0 ; j< Object.keys(data).length ; j++){
+                let country = lodash.invertBy(countryTag)[data[j][0]]
+                let color = genderColors[data[j][1]]
+                if (country){
+                    this.countryColors[country[0]] = color
+                    let polygon = this.mapSeries.getPolygonById(country)
+                    setTimeout(()=>{
+                    if(polygon){
+                        
+                    }
+                    },200)
+                }
+            }
+            console.log(this.countryColors)
+        })
+        .catch(err => console.log(err));
+        setTimeout(()=>{this.setHoverState()},1000)
+    }
     componentDidMount(){
         // Create Map
         let chart = am4core.create("chartdiv", am4maps.MapChart);
@@ -275,22 +253,8 @@ export default class Map extends Component {
         var desaturateFilter = new am4core.DesaturateFilter();
         desaturateFilter.saturation = 1;
         polygonTemplate.filters.push(desaturateFilter);
-        
-        polygonTemplate.events.on("over",function(event){
-            console.log(this.lockhover)
-            if(this.showAllEnabled===false && this.lockhover === false){
-                this.getBestGenre(countryTag[event.target.dataItem.dataContext.id],event.target)
-            }
-        },this)
-        polygonTemplate.events.on("out",function(event){
-            setTimeout(()=>{
-                if(this.showAllEnabled===false && this.lockhover === false){
-                    if(this.prevPolygon !== event.target){
-                        event.target.fill=am4core.color('#514E61')
-                    }
-                }
-            },500)
-        },this)
+
+        this.init()
         
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
@@ -369,64 +333,37 @@ export default class Map extends Component {
         this.pieSeries = pieSeries
         this.pieChart = pieChart
     } // Comp did mount
+    setHoverState = () =>{
+        console.log("hoverstate")
+        for (var i = 0; i < Object.entries(this.countryColors).length; i++) {
+            let countryId = Object.entries(this.countryColors)[i][0]
+            let color = Object.entries(this.countryColors)[i][1]
+            let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
+            if(polygon != null){
+                var hs = polygon.states.create("hover");
+                hs.properties.fill = am4core.color(color);
+            }
+        }
+
+    }
     showAll = () => {
         this.closeModal()
-        if(this.showAllEnabled === true){
+        if(this.showAllEnabled===false){
+            console.log("enable")
+            this.showAllEnabled=true
+            for (var i = 0; i < Object.entries(this.countryColors).length; i++) {
+                let countryId = Object.entries(this.countryColors)[i][0]
+                let color = Object.entries(this.countryColors)[i][1]
+                let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
+                polygon.fill=am4core.color(color)
+            }
+        }
+        else if(this.showAllEnabled === true){
             this.showAllEnabled=false
             console.log("disable")
             for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
                 let polygon = this.mapSeries.mapPolygons.getIndex(i);
                 polygon.fill=am4core.color("#514E61")
-            }
-        }
-        else{
-            this.showAllEnabled=true
-            for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
-                let polygon = this.mapSeries.mapPolygons.getIndex(i);
-                let country = countryTag[polygon.dataItem.dataContext.id]
-                let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
-                fetch(query)
-                .then(response => response.json())
-                .then(({data})=> {
-                    this.hoverGenre = data
-                    if(this.hoverGenre.length<1){
-                        // Error handling
-                        this.hoverGenre = "err"
-                    }
-                    else{
-                        let values=[
-                            [this.hoverGenre[0].blues,genderColors.blues,"blues"],
-                            [this.hoverGenre[0].classical,genderColors.classical,"classical"],
-                            [this.hoverGenre[0].electronic,genderColors.electronic,"electronic"],
-                            [this.hoverGenre[0].folk,genderColors.folk,"folk"],
-                            [this.hoverGenre[0].funk,genderColors.funk,"funk"],
-                            [this.hoverGenre[0].hiphop,genderColors.hiphop,"hiphop"],
-                            [this.hoverGenre[0].jazz,genderColors.jazz,"jazz"],
-                            [this.hoverGenre[0].latin,genderColors.latin,"latin"],
-                            [this.hoverGenre[0].pop,genderColors.pop,"pop"],
-                            [this.hoverGenre[0].reggae,genderColors.reggae,"reggae"],
-                            [this.hoverGenre[0].rock,genderColors.rock,"rock"]
-                        ]
-                        let max = 0
-                        let maxcolor = 0
-                        
-                        values.forEach(element => {
-                            if (element[0] > max){
-                                max = element[0]
-                                maxcolor = element[1]
-                            }
-                        });
-                        if(maxcolor !== 0){
-                            polygon.fill=am4core.color(maxcolor)
-                        }
-                        else{
-                            polygon.fill=am4core.color("#514E61")
-                        }
-                        console.log(maxcolor)
-                    }
-                })
-                .catch(err => console.log(err));
-                console.log(polygon.dataItem.dataContext.id)
             }
         }
         
@@ -456,17 +393,26 @@ export default class Map extends Component {
         }
     }
     handleNav = (target) =>{
-        this.closeModal()
+        for(let i=0;i<Object.entries(this.countryColors).length ; i++){
+            let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
+            polygon.states.removeKey("hover")
+        }
         this.curDecade = target
+        this.closeModal()
+        this.init()
         this.forceUpdate()
         if(this.showAllEnabled){
-            this.showAllEnabled=false
             this.showAll()
+            setTimeout(() => {
+                this.showAll()  
+            }, 120);
+        }
+        else{
+
         }
     }
     closeModal(){
         this.countryclicked=false
-        console.log(this.countryclicked)
         this.forceUpdate()
         this.zoomOut()
         this.map.goHome()
