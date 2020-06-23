@@ -35,6 +35,7 @@ app.get('/getcountry', (req,res) =>{
         }
     })
 })
+// Get best genre by country
 
 app.get('/getbestgenre',(req,res) => {
     const {decade} = req.query
@@ -47,6 +48,20 @@ app.get('/getbestgenre',(req,res) => {
     })
     .catch(err => console.log(err));
 })
+
+// Get number of albums of each genre
+app.get('/getalbumworld',(req,res) => {
+    const {decade} = req.query
+    let query = `https://sandbox.matthieuvidal.fr/wwmserv/json.php?decade='${decade}'&total`
+    fetch(query)
+    .then(response => response.json())
+    .then((data)=> {
+        console.log(data)
+        return res.json(data)
+    })
+    .catch(err => console.log(err));
+})
+
 
 app.listen(4000,() => {
     console.log('Server listening on port 4000')
