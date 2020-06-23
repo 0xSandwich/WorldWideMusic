@@ -31,7 +31,6 @@ function CountryDetails(props) {
 
   // Hook
     useEffect(() => {
-        console.log('test hook')
         let query = "http://localhost:4000/getalbumworld?decade="+decade
               fetch(query)
               .then(response => response.json())
@@ -44,7 +43,6 @@ function CountryDetails(props) {
                 {
                   setcasseCroute((casseCroute) => [...casseCroute, <p>*</p>])
                 }
-                console.log(casseCroute)
               })
               .catch(err => console.log(err));  
       }, [props.isactive])  
@@ -79,9 +77,6 @@ function CountryDetails(props) {
     // percentage.sort(function(a, b){return b-a})
     // genres.sort(function(a, b){return b-a})
   }
-
-  // console.log(data[0]);
-  console.log(props.isactive)
 
   // Print the table of Most produced genres
   let tablePrint = colors.map((element, key) => 
