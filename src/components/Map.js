@@ -23,6 +23,7 @@ export default class Map extends Component {
     showAllEnabled = false
     lockhover= false
     countryColors={}
+    globeView = false
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -408,6 +409,21 @@ export default class Map extends Component {
             this.map.dispose();
         }
     }
+    handleView = () => {
+        console.log('ok')
+        if(this.globeView){
+            this.globeView=false
+            this.map.projection= new am4maps.projections.Miller();
+            this.map.panBehavior = "default"
+        }
+        else{
+            this.globeView=true
+            this.map.projection= new am4maps.projections.Orthographic();
+            this.map.panBehavior = "rotateLongLat";
+            console.log('view')
+            this.forceUpdate()
+        }
+    }
     handleNav = (target) =>{
         this.clearPrevPolygon()
         for(let i=0;i<Object.entries(this.countryColors).length ; i++){
@@ -453,7 +469,7 @@ export default class Map extends Component {
             MUSIC GENRES ACROSS THE WORLD
             </h1>
         </div>
-        <DecadeInput curdecade={this.curDecade} showall={this.showAll} handleNav={this.handleNav} />
+        <DecadeInput handleview={this.handleView} curdecade={this.curDecade} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
         <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
