@@ -20,13 +20,13 @@ export class decadeInput extends Component {
                 <div className="controls">
                     <p>Show data</p>
                     <div className="controls-item">
-                        <img onClick={this.props.showall} src={eye} alt="view" />
-                        <img className="active" onClick={this.props.showall} src={eyeClose} alt="view" />
+                        <img className={this.props.isshowall ? "active" : null} onClick={this.props.showall} src={eye} alt="view" />
+                        <img className={!this.props.isshowall ? "active" : null} onClick={this.props.showall} src={eyeClose} alt="view" />
                     </div>
                     <p>Change view</p>
                     <div className="controls-item">
-                        <img className="active" onClick={this.props.handleview} src={mapIcon} alt="view" />
-                        <img onClick={this.props.handleview} src={globe} alt="view" />
+                        <img className={!this.props.globeview ? "active" : null} onClick={this.props.handleview} src={mapIcon} alt="view" />
+                        <img className={this.props.globeview ? "active" : null} onClick={this.props.handleview} src={globe} alt="view" />}
                     </div>
                 </div>
             </div>

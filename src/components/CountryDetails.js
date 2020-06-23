@@ -21,7 +21,7 @@ function CountryDetails(props) {
     "Reggae",
     "Rock",
   ]
-  let casseCroute = useState(0);
+  let casseCroute = 0
   let genres = []
   let genresTest = []
   let percentage = []
@@ -45,11 +45,9 @@ function CountryDetails(props) {
       props.data[0].rock
     )
 
-    console.log(genresTest)
 
     // Albums number
     nbrAlbums = genres.reduce((pv, cv) => pv + cv, 0)
-    console.log(nbrAlbums);
 
     // Create array and calc percentage of all styles
     genres.map((element, key) =>
@@ -89,6 +87,7 @@ function CountryDetails(props) {
       </th>
     </tr>
   ))
+  
 
   // Get nbr of album production
   let getAlbumWorld = () =>
@@ -101,11 +100,11 @@ function CountryDetails(props) {
           nbrAlbumsTotal = data.total == null ? 1 : data.total
           countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
           albumsChart()
+          
         })
         .catch(err => console.log(err));
   }
   getAlbumWorld();
-  console.log(countryPercentage)
 
 
   // Print chart of produced albums country/global
@@ -117,7 +116,6 @@ function CountryDetails(props) {
       console.log(casseCroute)
     }
   }
-  console.log(casseCroute)
 
 
   return (

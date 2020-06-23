@@ -70,7 +70,7 @@ export default class Map extends Component {
     
         let centerPoint = am4core.utils.spritePointToSvg(polygon.polygon.centerPoint, polygon.polygon);
         centerPoint = am4core.utils.svgPointToSprite(centerPoint, this.map.seriesContainer);
-    
+        console.log(this.pieSeries)
         this.pieChart.x = centerPoint.x - radius;
         this.pieChart.y = centerPoint.y - radius;
 
@@ -108,6 +108,9 @@ export default class Map extends Component {
         let polygon = this.prevPolygon
         if(polygon.states.hasKey("hover")){
             polygon.states.getKey('default').properties.fill=am4core.color("#514E61")
+            let temp = polygon.states.getKey('hover').properties.fill
+            polygon.states.getKey('hover').properties.fill=am4core.color("#514E61")
+            polygon.states.getKey('hover').properties.fill=temp
         }
         polygon.fill=am4core.color("#514E61")
         
@@ -310,7 +313,6 @@ export default class Map extends Component {
             { value: 100, category: "Reggae" },
             { value: 100, category: "Rock" }
         ];
-        
         // Chart styling
         var dropShadowFilter = new am4core.DropShadowFilter();
         dropShadowFilter.blur = 4;
@@ -328,12 +330,6 @@ export default class Map extends Component {
         // Remove default animation
         pieSeries.slices.template.states.getKey("hover").properties.scale = 1;
         pieSeries.slices.template.states.getKey("active").properties.shiftRadius = 0;
-        var hiddenState = pieSeries.hiddenState;
-        hiddenState.properties.startAngle = pieSeries.startAngle;
-        hiddenState.properties.endAngle = pieSeries.endAngle;
-        hiddenState.properties.opacity = 0;
-        hiddenState.properties.visible = false;
-        pieSeries.hiddenState.transitionDuration = 100;
         // Labels styling
         var labelTemplate = pieSeries.labels.template;
         labelTemplate.nonScaling = true;
@@ -415,6 +411,7 @@ export default class Map extends Component {
             this.globeView=false
             this.map.projection= new am4maps.projections.Miller();
             this.map.panBehavior = "default"
+            this.forceUpdate()
         }
         else{
             this.globeView=true
@@ -469,7 +466,7 @@ export default class Map extends Component {
             MUSIC GENRES ACROSS THE WORLD
             </h1>
         </div>
-        <DecadeInput handleview={this.handleView} curdecade={this.curDecade} showall={this.showAll} handleNav={this.handleNav} />
+        <DecadeInput globeview={this.globeView} handleview={this.handleView} curdecade={this.curDecade} isshowall={this.showAllEnabled} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
         <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
