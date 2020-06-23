@@ -2,6 +2,7 @@ import React from "react"
 import genderColors from "../assets/GenderColors"
 import productAlbums from "../assets/images/productAlbums.svg"
 import closeButton from "../assets/images/close.svg"
+import DecadeInput from "./DecadeInput.js";
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -20,9 +21,12 @@ function CountryDetails(props) {
     "Reggae",
     "Rock",
   ]
+  let casseCroute = useState(0);
   let genres = []
   let genresTest = []
   let percentage = []
+  let nbrAlbumsTotal = 1
+  let countryPercentage
   let nbrAlbums
 
   if (props.data != null) {
@@ -45,6 +49,7 @@ function CountryDetails(props) {
 
     // Albums number
     nbrAlbums = genres.reduce((pv, cv) => pv + cv, 0)
+    console.log(nbrAlbums);
 
     // Create array and calc percentage of all styles
     genres.map((element, key) =>
@@ -61,7 +66,8 @@ function CountryDetails(props) {
   console.log(props.isactive)
 
   // Print the table of Most produced genres
-  let tablePrint = colors.map((element, key) => (
+  let tablePrint = colors.map((element, key) => 
+  (
     <tr key={key + Math.random()}>
       <th scope="row" key={key + Math.random()}>
         <div
@@ -83,6 +89,36 @@ function CountryDetails(props) {
       </th>
     </tr>
   ))
+
+  // Get nbr of album production
+  let getAlbumWorld = () =>
+  {
+    let query = "http://localhost:4000/getalbumworld?decade="+decade
+        fetch(query)
+        .then(response => response.json())
+        .then((data)=> 
+        {
+          nbrAlbumsTotal = data.total == null ? 1 : data.total
+          countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
+          albumsChart()
+        })
+        .catch(err => console.log(err));
+  }
+  getAlbumWorld();
+  console.log(countryPercentage)
+
+
+  // Print chart of produced albums country/global
+  let albumsChart = () => 
+  {
+    for (let i = 0; i < countryPercentage; i++)
+    {
+      casseCroute.push(<p>blabla</p>)
+      console.log(casseCroute)
+    }
+  }
+  console.log(casseCroute)
+
 
   return (
     <div className={props.isactive ? null : "hidden"}>
@@ -106,8 +142,7 @@ function CountryDetails(props) {
         </h1>
         <h3>• Number of produced albums</h3>
         <div className="product-albums-container">
-          <img src={productAlbums} alt="productAlbums" />
-          <img src={productAlbums} alt="productAlbums" />
+            {casseCroute}
         </div>
         <h3>• Most produced genres</h3>
         <table>
