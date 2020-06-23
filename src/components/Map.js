@@ -19,7 +19,7 @@ export default class Map extends Component {
     colorSet = new am4core.ColorSet()
     countryclicked=false
     hoverGenre=null
-    prevPolygon={fill:null}
+    prevPolygon={states:{hasKey(){return false}}}
     showAllEnabled = false
     lockhover= false
     countryColors={}
@@ -36,13 +36,13 @@ export default class Map extends Component {
             }
             else{
                 // Get current polygon
-                this.selectPolygon(target); 
+                this.selectPolygon(country,target); 
             }
         })
         .catch(err => console.log(err));
     }
     // Set pie chart info for the clicked country
-    showPieChart = (polygon) => {
+    showPieChart = (country,polygon) => {
         if (this.albumData==="err"){
             console.log("not found")
         }
@@ -80,43 +80,42 @@ export default class Map extends Component {
         }
     
 
-        let fill = polygon.fill;
-    
-        for (let i = 0; i < this.pieSeries.dataItems.length; i++) {
-            let dataItem = this.pieSeries.dataItems.getIndex(i);
-            dataItem.value = this.genres[i][0]
-            dataItem.slice.fill = am4core.color(am4core.colors.interpolate(
-                fill.rgb,
-                am4core.color(this.genres[i][1]).rgb,
-                1
-            ));
-        }
         // Fill country by genre color
-        polygon.fill= this.maxGenre
+        country = lodash.invertBy(countryTag)[country]
+        console.log(this.countryColors[country[0]])
+        polygon.setState("enable")
+        // set Hover color = genre color
+        polygon.states.getKey('default').properties.fill=this.countryColors[country[0]]
         this.prevPolygon = polygon
-        this.lockhover=false
 
         this.pieSeries.show();
         this.pieChart.show();
         this.hideSmall(this.pieSeries.dataItems.values)
     }
+    clearPrevPolygon=()=>{
+        let polygon = this.prevPolygon
+        if(polygon.states.hasKey("hover")){
+            polygon.states.getKey('default').properties.fill=am4core.color("#514E61")
+        }
+        polygon.fill=am4core.color("#514E61")
+    }
     // Get polygon to morph in pie chart
-    selectPolygon = (polygon) => {
-        this.prevPolygon.fill=am4core.color("#514E61")
+    selectPolygon = (country,polygon) => {
+        this.clearPrevPolygon()
         if (this.morphedPolygon !== polygon) {
             var animation = this.pieSeries.hide();
             if (animation) {
                 animation.events.on("animationended", function () {
-                    this.morphToCircle(polygon);
+                    this.morphToCircle(country,polygon);
                 }.bind(this))
             }
             else {
-                this.morphToCircle(polygon);
+                this.morphToCircle(country,polygon);
             }
         }
     }
     // Morph polygon (country) to pie chart
-    morphToCircle = (polygon) => {
+    morphToCircle = (country,polygon) => {
         var animationDuration = polygon.polygon.morpher.morphDuration;
         this.countryclicked=true
         this.forceUpdate()
@@ -131,22 +130,22 @@ export default class Map extends Component {
         // save currently morphed polygon4
         this.morphedPolygon = polygon;
 
-        this.zoomToCountry(polygon);
+        this.zoomToCountry(country,polygon);
         
     }
     morphBack = () =>{
             this.countryclicked = false
             this.forceUpdate()
     }
-    zoomToCountry = (polygon) => {
+    zoomToCountry = (country,polygon) => {
         var zoomAnimation = this.map.zoomToMapObject(polygon, 2.2, true);
         if (zoomAnimation) {
             zoomAnimation.events.on("animationended", function () {
-                this.showPieChart(polygon);
+                this.showPieChart(country,polygon);
             }.bind(this))
         }
         else {
-            this.showPieChart(polygon);
+            this.showPieChart(country,polygon);
         }
     }
     // Fade out all countries except selected
@@ -172,6 +171,10 @@ export default class Map extends Component {
         }
     }
     init =() =>{
+        for(let i=0;i<Object.entries(this.countryColors).length ; i++){
+            let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
+            polygon.states.removeKey("hover")
+        }
         this.countryColors={}
         let query = "http://localhost:4000/getbestgenre?decade="+this.curDecade
         fetch(query)
@@ -261,7 +264,6 @@ export default class Map extends Component {
             if(this.showAllEnabled){
                 this.showAll()
             }
-            this.lockhover=true
             // Requète pour obtenir les stats pour l'année / pays en cours
             this.getAlbum(countryTag[event.target.dataItem.dataContext.id],event.target)
         }.bind(this));
@@ -340,8 +342,10 @@ export default class Map extends Component {
             let color = Object.entries(this.countryColors)[i][1]
             let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
             if(polygon != null){
-                var hs = polygon.states.create("hover");
+                let hs = polygon.states.create("hover");
                 hs.properties.fill = am4core.color(color);
+                let as = polygon.states.create("enable");
+                as.properties.fill = am4core.color(color);
             }
         }
 
@@ -393,6 +397,7 @@ export default class Map extends Component {
         }
     }
     handleNav = (target) =>{
+        this.clearPrevPolygon()
         for(let i=0;i<Object.entries(this.countryColors).length ; i++){
             let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
             polygon.states.removeKey("hover")
@@ -412,6 +417,7 @@ export default class Map extends Component {
         }
     }
     closeModal(){
+        this.clearPrevPolygon()
         this.countryclicked=false
         this.forceUpdate()
         this.zoomOut()
