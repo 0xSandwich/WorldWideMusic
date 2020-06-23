@@ -24,6 +24,7 @@ export default class Map extends Component {
     lockhover= false
     countryColors={}
     globeView = false
+    move = false
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
         let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
@@ -277,7 +278,20 @@ export default class Map extends Component {
         
         // When a country is clicked
         polygonTemplate.events.on("hit", function(event) {
+            if(this.move ===true){
+                this.move=false 
+            }
+            else{
+                this.move=true
+            }
+            console.log(this.move)
             if(this.showAllEnabled){
+                if(this.move=false){
+                    this.move=true
+                }
+                else{
+                    this.move=false
+                }
                 this.showAll()
             }
             // Requète pour obtenir les stats pour l'année / pays en cours
@@ -468,7 +482,7 @@ export default class Map extends Component {
         </div>
         <DecadeInput globeview={this.globeView} handleview={this.handleView} curdecade={this.curDecade} isshowall={this.showAllEnabled} showall={this.showAll} handleNav={this.handleNav} />
         <MapLegend legendClass="legend-home" data={this.albumData} />
-        <CountryDetails curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
+        <CountryDetails move={this.move} curDecade={this.curDecade} isactive={this.countryclicked} data={this.albumData} genre={this.genres} closemodal={this.closeModal.bind(this)}></CountryDetails>
         <div id="chartdiv" className="map-chart" ></div>
     </div>)
     }
