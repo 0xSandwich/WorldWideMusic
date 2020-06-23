@@ -79,6 +79,17 @@ export default class Map extends Component {
             this.pieChart.y = 350
         }
     
+        let fill = polygon.fill;
+    
+        for (let i = 0; i < this.pieSeries.dataItems.length; i++) {
+            let dataItem = this.pieSeries.dataItems.getIndex(i);
+            dataItem.value = this.genres[i][0]
+            dataItem.slice.fill = am4core.color(am4core.colors.interpolate(
+                fill.rgb,
+                am4core.color(this.genres[i][1]).rgb,
+                1
+            ));
+        }
 
         // Fill country by genre color
         country = lodash.invertBy(countryTag)[country]
@@ -98,6 +109,7 @@ export default class Map extends Component {
             polygon.states.getKey('default').properties.fill=am4core.color("#514E61")
         }
         polygon.fill=am4core.color("#514E61")
+        
     }
     // Get polygon to morph in pie chart
     selectPolygon = (country,polygon) => {
