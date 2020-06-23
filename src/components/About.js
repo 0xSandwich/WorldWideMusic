@@ -1,6 +1,6 @@
 import React from "react"
 import poster from "../assets/images/poster.svg"
-import map from "../assets/images/mapcolor.svg"
+import map from "../assets/images/map.svg"
 // social link
 import folio from "../assets/images/folio.svg"
 import twitter from "../assets/images/twitter.svg"
