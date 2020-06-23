@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import genderColors from "../assets/GenderColors"
 import productAlbums from "../assets/images/productAlbums.svg"
 import closeButton from "../assets/images/close.svg"
@@ -21,13 +21,33 @@ function CountryDetails(props) {
     "Reggae",
     "Rock",
   ]
-  let casseCroute = 0
+  let [casseCroute, setcasseCroute] = useState([]);
   let genres = []
   let genresTest = []
   let percentage = []
   let nbrAlbumsTotal = 1
   let countryPercentage
   let nbrAlbums
+
+  // Hook
+    useEffect(() => {
+        console.log('test hook')
+        let query = "http://localhost:4000/getalbumworld?decade="+decade
+              fetch(query)
+              .then(response => response.json())
+              .then((data)=> 
+              {
+                setcasseCroute([])
+                nbrAlbumsTotal = data.total == null ? 1 : data.total
+                countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
+                for (let i = 0; i < countryPercentage; i++)
+                {
+                  setcasseCroute((casseCroute) => [...casseCroute, <p>*</p>])
+                }
+                console.log(casseCroute)
+              })
+              .catch(err => console.log(err));  
+      }, [props.isactive])  
 
   if (props.data != null) {
     // Create array of genres
@@ -88,35 +108,6 @@ function CountryDetails(props) {
     </tr>
   ))
   
-
-  // Get nbr of album production
-  let getAlbumWorld = () =>
-  {
-    let query = "http://localhost:4000/getalbumworld?decade="+decade
-        fetch(query)
-        .then(response => response.json())
-        .then((data)=> 
-        {
-          nbrAlbumsTotal = data.total == null ? 1 : data.total
-          countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-          albumsChart()
-          
-        })
-        .catch(err => console.log(err));
-  }
-  getAlbumWorld();
-
-
-  // Print chart of produced albums country/global
-  let albumsChart = () => 
-  {
-    for (let i = 0; i < countryPercentage; i++)
-    {
-      casseCroute.push(<p>blabla</p>)
-      console.log(casseCroute)
-    }
-  }
-
 
   return (
     <div className={props.isactive ? null : "hidden"}>
