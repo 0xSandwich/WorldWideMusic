@@ -169,6 +169,7 @@ function CountryDetails(props) {
     for (let i = 0; i < 5; i++) {
       html.push(
       <div className="topcharts" key={uuidv4()}>
+        <img className="cover" key={uuidv4()} src={`https://sandbox.matthieuvidal.fr/wwmserv/img/covers/${topChartsSpotify[i]}.jpg`}></img>
         <div className="rank" key={uuidv4()}>{topChartsRank[i]}</div>
         <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
         <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
