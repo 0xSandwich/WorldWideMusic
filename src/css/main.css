@@ -409,7 +409,7 @@ COUNTRY DETAILS
 .country-modal {
   box-sizing: border-box;
   position: absolute;
-  bottom: 60px;
+  top: 20vh;
   right: 70px;
   max-height: 70vh;
   width: 30vw;
