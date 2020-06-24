@@ -412,7 +412,7 @@ COUNTRY DETAILS
   top: 20vh;
   right: 70px;
   max-height: 70vh;
-  width: 488px;
+  width: 500px;
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
   border-radius: 30px 30px 30px 30px;
@@ -479,15 +479,15 @@ COUNTRY DETAILS
     flex-wrap: wrap;
     margin-bottom: 30px; }
     .country-modal .product-albums-container div {
-      width: 15px;
-      height: 15px;
-      margin: 2px;
+      width: 18px;
+      height: 18px;
+      margin: 3px;
       background: rgba(0, 0, 0, 0.2);
       border-radius: 5px; }
     .country-modal .product-albums-container .fill {
-      width: 15px;
-      height: 15px;
-      margin: 2px;
+      width: 18px;
+      height: 18px;
+      margin: 3px;
       background: #5855ff;
       border-radius: 5px; }
   .country-modal .product_text {
