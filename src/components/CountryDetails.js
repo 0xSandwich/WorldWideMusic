@@ -82,13 +82,14 @@ function CountryDetails(props) {
       .then((response) => response.json())
       .then((data) => 
       {
-          setTopChartsData(data)
+          setTopChartsData(data.data)
           // console.log(data)
           // console.log(data.data[0])
       }
       )
       .catch((err) => console.log(err))
-  }, [props.isactive, props.move, decade])
+  }, [decade]) // Old values : props.isactive, props.move, decade | Now only reloading at a decade change
+  //console.log(topChartsData)
 
 
   if (props.data != null) {
