@@ -62,7 +62,6 @@ app.get('/getbestgenre',(req,res) => {
     fetch(query)
     .then(response => response.json())
     .then((data)=> {
-        console.log(data)
         return res.json(data)
     })
     .catch(err => console.log(err));
