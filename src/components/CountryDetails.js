@@ -160,7 +160,7 @@ function CountryDetails(props) {
             <h1>charts</h1>
           </div>
         </div>
-        <div className={curTab === 1 ? "hidden" : "null"}>
+        <div className={curTab === 1 ? "hidden" : "modal-content"}>
           <img
             className="close-modal"
             onClick={props.closemodal}
@@ -188,7 +188,7 @@ function CountryDetails(props) {
             </tbody>
           </table>
         </div>
-        <div className={curTab === 0 ? "hidden" : "null"}>
+        <div className={curTab === 0 ? "hidden" : "modal-content"}>
           <h1>TOP CHARTS</h1>
             {/* <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/the-essential-george-duke/303520281?app=music" height="450" frameBorder="0"></iframe>
             <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> */}
