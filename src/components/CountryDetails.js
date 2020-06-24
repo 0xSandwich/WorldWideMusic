@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import genderColors from "../assets/GenderColors"
+import { v4 as uuidv4 } from 'uuid';
 import closeButton from "../assets/images/close.svg"
 
 function CountryDetails(props) {
@@ -59,13 +60,13 @@ function CountryDetails(props) {
           for (; i < countryPercentage; i++) {
             setcasseCroute((casseCroute) => [
               ...casseCroute,
-              <div className="fill"></div>,
+              <div className="fill" key={uuidv4()}></div>,
             ])
           }
           for (; i < 100; i++) {
             setcasseCroute((casseCroute) => [
               ...casseCroute,
-              <div className="empty"></div>,
+              <div className="empty" key={uuidv4()}></div>,
             ])
           }
         }
@@ -124,23 +125,23 @@ function CountryDetails(props) {
 
   // Print the table of Most produced genres
   let tablePrint = colors.map((element, key) => (
-    <tr key={key + Math.random()}>
-      <th scope="row" key={key + Math.random()}>
+    <tr key={uuidv4()}>
+      <th scope="row" key={uuidv4()}>
         <div
           className="modal-genre-color"
           style={{ backgroundColor: element[1] }}
         ></div>
       </th>
-      <th scope="row" key={key + Math.random()}>
+      <th scope="row" key={uuidv4()}>
         {genresName[key]}
       </th>
-      <th scope="row" key={key + Math.random()}>
+      <th scope="row" key={uuidv4()}>
         {genres[key]}
       </th>
-      <th scope="row" key={key + Math.random()}>
+      <th scope="row" key={uuidv4()}>
         {percentage[key]} %
       </th>
-      <th scope="row" key={key + Math.random()}>
+      <th scope="row" key={uuidv4()}>
         Albums
       </th>
     </tr>
