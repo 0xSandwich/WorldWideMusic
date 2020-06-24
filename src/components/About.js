@@ -41,16 +41,16 @@ function About() {
           {/* <a href="" target="_blank"><img className="discord" src={discord} alt="discord"></img></a> */}
         </div>
 
-        {/* Mathieu */}
+        {/* Matthieu */}
         <p><a href="http://www.matthieuvidal.com/" target="_blank">Matthieu Vidal</a> - Back-end Developper</p>
         <div className="social-container">
-          <a href="http://www.matthieuvidal.com/" target="_blank"><img className="folio" src={folio} alt="folio"></img></a>
+          {/* <a href="http://www.matthieuvidal.com/" target="_blank"><img className="folio" src={folio} alt="folio"></img></a> */}
           <a href="https://twitter.com/matthieuvdl" target="_blank"><img className="twitter" src={twitter} alt="twitter"></img></a>
           <a href="https://www.linkedin.com/in/matthieuvdl/" target="_blank"><img className="linkedin" src={linkedin} alt="linkedin"></img></a>
           <a href="https://github.com/matthieuvdl" target="_blank"><img className="github" src={github} alt="github"></img></a>
           {/* <a href="" target="_blank"><img className="behance" src={behance} alt="behance"></img></a> */}
           {/* <a href="" target="_blank"><img className="dribbble" src={dribbble} alt="dribbble"></img></a> */}
-          <a href="" target="_blank"><img className="discord" src={discord} alt="discord"></img></a>
+          <a href="https://discord.com/users/161905660735389696" target="_blank"><img className="discord" src={discord} alt="discord"></img></a>
         </div>
 
         {/* Cathy */}
@@ -84,7 +84,7 @@ function About() {
           {/* <a href="" target="_blank"><img className="github" src={github} alt="github"></img></a> */}
           <a href="https://www.behance.net/sibyllehervouet" target="_blank"><img className="behance" src={behance} alt="behance"></img></a>
           <a href="https://dribbble.com/Sibsib" target="_blank"><img className="dribbble" src={dribbble} alt="dribbble"></img></a>
-          <a href="" target="_blank"><img className="discord" src={discord} alt="discord"></img></a>
+          <a href="https://discord.com/users/664490938831208482" target="_blank"><img className="discord" src={discord} alt="discord"></img></a>
         </div>
 
         {/* Myriam */}
@@ -95,7 +95,7 @@ function About() {
           {/* <a href="" target="_blank"><img className="github" src={github} alt="github"></img></a> */}
           <a href="https://www.behance.net/mabidonn" target="_blank"><img className="behance" src={behance} alt="behance"></img></a>
           <a href="https://dribbble.com/mabidonn" target="_blank"><img className="dribbble" src={dribbble} alt="dribbble"></img></a>
-          {/* <a href="" target="_blank"><img className="discord" src={discord} alt="discord"></img></a> */}
+          <a href="https://discord.com/users/664058855235256353" target="_blank"><img className="discord" src={discord} alt="discord"></img></a> 
         </div>
 
       </div>
