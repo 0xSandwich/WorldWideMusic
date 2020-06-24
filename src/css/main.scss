@@ -519,7 +519,7 @@ COUNTRY DETAILS
   right: 70px;
   // height: 78vh;
   max-height: 70vh;
-  width: 30vw;
+  width: 488px;
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
   border-radius: 30px 30px 30px 30px;
@@ -527,15 +527,18 @@ COUNTRY DETAILS
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  overflow-x: scroll !important;
+  justify-content: flex-start; 
+  //modal content
+  .modal-content{
+      padding-top: 25px;
+      overflow-x: scroll !important;
+  }
   // modal menu
   .modal-menu {
     margin: 0px -45px 0px -45px;
     width: calc(100% + 90px);
     display: flex;
     flex-direction: row;
-    margin-bottom: 35px;
     h1 {
       width: auto;
       font-size: 16px;
@@ -594,16 +597,18 @@ COUNTRY DETAILS
     flex-wrap: wrap;
     margin-bottom: 30px;
     div {
-      width: 23px;
-      height: 23px;
+      width: 15px;
+      height: 15px;
       margin: 2px;
       background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
     }
     .fill {
-      width: 23px;
-      height: 23px;
+      width: 15px;
+      height: 15px;
       margin: 2px;
       background: $main-color;
+      border-radius: 5px;
     }
   }
 
