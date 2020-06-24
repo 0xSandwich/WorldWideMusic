@@ -50,7 +50,6 @@ function CountryDetails(props) {
               })
               .catch(err => console.log(err));  
       }, [props.isactive, props.move])
-      console.log(props.move)
 
   if (props.data != null) {
     // Create array of genres
