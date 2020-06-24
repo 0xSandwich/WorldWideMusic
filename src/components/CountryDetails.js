@@ -48,18 +48,25 @@ function CountryDetails(props) {
         setcasseCroute([])
         nbrAlbumsTotal = data.total == null ? 1 : data.total
         countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-        let i = 0
-        for (; i < countryPercentage; i++) {
-          setcasseCroute((casseCroute) => [
-            ...casseCroute,
-            <div className="fill"></div>,
-          ])
+        if(countryPercentage == 0)
+        {
+          setcasseCroute(<p class="product_text">This country only produced less than 1% needed to be printed on the graphic visualization.</p>)
         }
-        for (; i <= 100; i++) {
-          setcasseCroute((casseCroute) => [
-            ...casseCroute,
-            <div className="empty"></div>,
-          ])
+        else
+        {
+          let i = 0
+          for (; i < countryPercentage; i++) {
+            setcasseCroute((casseCroute) => [
+              ...casseCroute,
+              <div className="fill"></div>,
+            ])
+          }
+          for (; i <= 100; i++) {
+            setcasseCroute((casseCroute) => [
+              ...casseCroute,
+              <div className="empty"></div>,
+            ])
+          }
         }
       })
       .catch((err) => console.log(err))
@@ -161,6 +168,7 @@ function CountryDetails(props) {
           </table>
         </div>
         <div className={curTab === 0 ? "hidden" : "null"}>
+          <h1></h1>
           <h2>Hello world^^</h2>
         </div>
       </div>
