@@ -25,7 +25,6 @@ function CountryDetails(props) {
   let [curTab,setTab] = useState(0)
   let genres = []
   let percentage = []
-  let countryPercentage
   let nbrAlbums
 
   let handleNav = (target) =>{
@@ -39,7 +38,8 @@ function CountryDetails(props) {
 
   // Hook to Get Worldwide stats
   useEffect(() => {
-    let nbrAlbumsTotal;
+    let nbrAlbumsTotal
+    let countryPercentage
     let query = "http://localhost:4000/getalbumworld?decade=" + decade
     fetch(query)
       .then((response) => response.json())
@@ -87,7 +87,7 @@ function CountryDetails(props) {
       }
       )
       .catch((err) => console.log(err))
-  }, [props.isactive, props.move])
+  }, [props.isactive, props.move, decade])
 
 
   if (props.data != null) {
