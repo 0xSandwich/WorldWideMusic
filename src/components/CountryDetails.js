@@ -39,14 +39,18 @@ function CountryDetails(props) {
                 setcasseCroute([])
                 nbrAlbumsTotal = data.total == null ? 1 : data.total
                 countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-                for (let i = 0; i < countryPercentage; i++)
+                let i = 0
+                for (; i < countryPercentage; i++)
                 {
-                  setcasseCroute((casseCroute) => [...casseCroute, <p>*</p>])
+                  setcasseCroute((casseCroute) => [...casseCroute, <div className="fill"></div>])
+                }
+                for (; i <= 100; i++) {
+                  setcasseCroute((casseCroute) => [...casseCroute, <div className="empty"></div>])
                 }
               })
               .catch(err => console.log(err));  
-      }, [props.isactive, props.moove])
-      console.log(props.moove)
+      }, [props.isactive, props.move])
+      console.log(props.move)
 
   if (props.data != null) {
     // Create array of genres
