@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"
 import genderColors from "../assets/GenderColors"
-import productAlbums from "../assets/images/productAlbums.svg"
 import closeButton from "../assets/images/close.svg"
-import DecadeInput from "./DecadeInput.js"
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -26,7 +24,6 @@ function CountryDetails(props) {
   let [topChartsData, setTopChartsData] = useState({})
   let [curTab,setTab] = useState(0)
   let genres = []
-  let genresTest = []
   let percentage = []
   let nbrAlbumsTotal = 1
   let countryPercentage
