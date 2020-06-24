@@ -479,17 +479,17 @@ COUNTRY DETAILS
     flex-wrap: wrap;
     margin-bottom: 30px; }
     .country-modal .product-albums-container div {
-      width: 18px;
-      height: 18px;
-      margin: 3px;
+      width: 16px;
+      height: 16px;
+      margin: 2.26px;
       background: rgba(0, 0, 0, 0.2);
-      border-radius: 5px; }
+      border-radius: 1px; }
     .country-modal .product-albums-container .fill {
-      width: 18px;
-      height: 18px;
-      margin: 3px;
+      width: 16px;
+      height: 16px;
+      margin: 2.26px;
       background: #5855ff;
-      border-radius: 5px; }
+      border-radius: 1px; }
   .country-modal .product_text {
     margin-top: -5px;
     margin-bottom: 10px; }
