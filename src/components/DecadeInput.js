@@ -26,7 +26,7 @@ export class decadeInput extends Component {
                     <p>Change view</p>
                     <div className="controls-item">
                         <img className={!this.props.globeview ? "active" : null} onClick={this.props.handleview} src={mapIcon} alt="view" />
-                        <img className={this.props.globeview ? "active" : null} onClick={this.props.handleview} src={globe} alt="view" />}
+                        <img className={this.props.globeview ? "active" : null} onClick={this.props.handleview} src={globe} alt="view" />
                     </div>
                 </div>
             </div>
