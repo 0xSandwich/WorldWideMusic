@@ -38,6 +38,7 @@ $main-color: #5855ff;
   &::-ms-scrollbar {
     display: none !important;
   }
+  scrollbar-width: none;
 }
 
 body {
@@ -527,11 +528,12 @@ COUNTRY DETAILS
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   //modal content
-  .modal-content{
-      padding-top: 25px;
-      overflow-x: scroll !important;
+  .modal-content {
+    padding-top: 25px;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
   }
   // modal menu
   .modal-menu {
@@ -559,7 +561,7 @@ COUNTRY DETAILS
         color: $link-inactive-color;
       }
     }
-    .close-modal-container{
+    .close-modal-container {
       // background-color: red;
       display: flex;
       justify-content: center;

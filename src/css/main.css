@@ -14,7 +14,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Europa-Regular"; }
+  font-family: "Europa-Regular";
+  scrollbar-width: none; }
   *::-webkit-scrollbar {
     display: none !important; }
   *::-moz-scrollbar {
@@ -423,7 +424,8 @@ COUNTRY DETAILS
   justify-content: flex-start; }
   .country-modal .modal-content {
     padding-top: 25px;
-    overflow-x: scroll !important; }
+    overflow-y: scroll !important;
+    overflow-x: hidden !important; }
   .country-modal .modal-menu {
     margin: 0px -45px 15px -45px;
     width: calc(100% + 90px);
