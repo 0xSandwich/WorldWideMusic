@@ -46,7 +46,8 @@ h3 {
   color: white;
   font-size: 18px;
   margin-bottom: 20px;
-  font-family: "Europa-Regular"; }
+  font-family: "Europa-Regular";
+  line-height: 30px; }
 
 a {
   color: white;
@@ -410,6 +411,7 @@ COUNTRY DETAILS
   position: absolute;
   bottom: 0;
   right: 70px;
+  max-height: 80vh;
   width: 30vw;
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
@@ -419,7 +421,7 @@ COUNTRY DETAILS
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  overflow: scroll; }
+  overflow: scroll !important; }
   .country-modal .modal-menu {
     margin: 0px -45px 0px -45px;
     width: calc(100% + 90px);
@@ -462,19 +464,13 @@ COUNTRY DETAILS
     top: 38px;
     width: 14px;
     cursor: pointer; }
-  .country-modal .product-albums-container {
-    width: 100%;
-    margin-bottom: 40px; }
-    .country-modal .product-albums-container img {
-      height: 50px;
-      margin-right: 10px; }
   .country-modal table {
     margin-bottom: 30px;
     width: 100%; }
     .country-modal table .line-separator {
       position: absolute;
       left: 50%;
-      height: 280px;
+      height: auto;
       margin-top: 8px;
       border-left: 0.5px solid rgba(255, 255, 255, 0.3); }
     .country-modal table tbody.genres-container {
@@ -501,5 +497,30 @@ COUNTRY DETAILS
     opacity: 0; }
   100% {
     opacity: 1; } }
+/*
+*
+PRODUCTED ALBUMS
+*
+*/
+.product-albums-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; }
+  .product-albums-container div {
+    width: 23px;
+    height: 23px;
+    margin: 2px;
+    background: rgba(0, 0, 0, 0.2); }
+  .product-albums-container .fill {
+    width: 23px;
+    height: 23px;
+    margin: 2px;
+    background: #5855ff; }
+
+.product_text {
+  margin-top: -5px;
+  margin-bottom: 10px; }
 
 /*# sourceMappingURL=main.css.map */

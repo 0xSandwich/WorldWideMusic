@@ -70,6 +70,7 @@ h3 {
   font-size: 18px;
   margin-bottom: 20px;
   font-family: "Europa-Regular";
+  line-height: 30px;
 }
 
 // link
@@ -517,6 +518,7 @@ COUNTRY DETAILS
   bottom: 0;
   right: 70px;
   // height: 78vh;
+  max-height: 80vh;
   width: 30vw;
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
@@ -526,7 +528,7 @@ COUNTRY DETAILS
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  overflow: scroll;
+  overflow: scroll !important;
   // modal menu
   .modal-menu {
     margin: 0px -45px 0px -45px;
@@ -583,20 +585,12 @@ COUNTRY DETAILS
     width: 14px;
     cursor: pointer;
   }
-  .product-albums-container {
-    width: 100%;
-    margin-bottom: 40px;
-    img {
-      height: 50px;
-      margin-right: 10px;
-    }
-  }
   table {
     margin-bottom: 30px;
     .line-separator {
       position: absolute;
       left: 50%;
-      height: 280px;
+      height: auto;
       margin-top: 8px;
       border-left: 0.5px solid rgba(255, 255, 255, 0.3);
     }
@@ -639,4 +633,35 @@ COUNTRY DETAILS
   100% {
     opacity: 1;
   }
+}
+
+/*
+*
+PRODUCTED ALBUMS
+*
+*/
+
+.product-albums-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  div {
+    width: 23px;
+    height: 23px;
+    margin: 2px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .fill {
+    width: 23px;
+    height: 23px;
+    margin: 2px;
+    background: $main-color;
+  }
+}
+
+.product_text {
+  margin-top: -5px;
+  margin-bottom: 10px;
 }

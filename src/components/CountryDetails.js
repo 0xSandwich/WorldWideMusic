@@ -128,7 +128,8 @@ function CountryDetails(props) {
         <h1>
           {country} in {decade}
         </h1>
-        <h3>• Number of produced albums</h3>
+        <h3>• Number of produced albums compared to the rest of the world</h3>
+        <p class="product_text">1 unit = 1%</p>
         <div className="product-albums-container">
             {casseCroute}
         </div>
