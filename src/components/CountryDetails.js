@@ -65,7 +65,7 @@ function CountryDetails(props) {
               <div className="fill"></div>,
             ])
           }
-          for (; i <= 100; i++) {
+          for (; i < 100; i++) {
             setcasseCroute((casseCroute) => [
               ...casseCroute,
               <div className="empty"></div>,
