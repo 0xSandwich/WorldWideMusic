@@ -238,7 +238,7 @@ export default class Map extends Component {
 
         // Configure series
         let polygonTemplate = polygonSeries.mapPolygons.template;
-        polygonTemplate.tooltipText = "{name}";
+        polygonTemplate.tooltipText = "{name} :)";
         polygonTemplate.strokeWidth=0
         polygonTemplate.strokeOpacity=0
         polygonTemplate.fill = am4core.color("#514E61");
@@ -286,12 +286,6 @@ export default class Map extends Component {
             }
             console.log(this.move)
             if(this.showAllEnabled){
-                if(this.move=false){
-                    this.move=true
-                }
-                else{
-                    this.move=false
-                }
                 this.showAll()
             }
             // Requète pour obtenir les stats pour l'année / pays en cours
@@ -428,12 +422,14 @@ export default class Map extends Component {
             this.forceUpdate()
         }
         else{
+            this.map.goHome()
             this.globeView=true
             this.map.projection= new am4maps.projections.Orthographic();
             this.map.panBehavior = "rotateLongLat";
             console.log('view')
             this.forceUpdate()
         }
+        console.log(this.map.projection)
     }
     handleNav = (target) =>{
         this.clearPrevPolygon()
