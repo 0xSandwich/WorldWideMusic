@@ -23,8 +23,8 @@ app.use(cors());
 
 // Get Top Albums
 app.get('/gettopcharts', (req,res) =>{
-    const decade = req.query
-    const SELECT_COUNTRY = `SELECT * FROM topalbums WHERE decade = '${decade}'`
+    const {decade} = req.query
+    const SELECT_COUNTRY = `SELECT * FROM topalbums WHERE decade = '${decade}' `
     connection.query(SELECT_COUNTRY, (err, results) => {
         if (err){ 
             return res.send(err)

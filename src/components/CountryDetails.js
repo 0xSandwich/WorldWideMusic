@@ -22,7 +22,9 @@ function CountryDetails(props) {
     "Rock",
   ]
   let [casseCroute, setcasseCroute] = useState([])
-  let [curTab,setTab] = useState(0)
+  let [visuTopText, setVisuTopText] = useState('')
+  let [topChartsData, setTopChartsData] = useState({})
+  let [curTab,setTab] = useState(<p class="product_text"></p>)
   let genres = []
   let genresTest = []
   let percentage = []
@@ -39,31 +41,56 @@ function CountryDetails(props) {
     }
   }
 
-  // Hook
+  // Hook to Get Worldwide stats
   useEffect(() => {
     let query = "http://localhost:4000/getalbumworld?decade=" + decade
     fetch(query)
       .then((response) => response.json())
       .then((data) => {
+        setVisuTopText('')
         setcasseCroute([])
         nbrAlbumsTotal = data.total == null ? 1 : data.total
         countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-        let i = 0
-        for (; i < countryPercentage; i++) {
-          setcasseCroute((casseCroute) => [
-            ...casseCroute,
-            <div className="fill"></div>,
-          ])
+        if(countryPercentage == 0)
+        {
+          setcasseCroute(<p className="product_text">This country only produced less than 1% needed to be printed on the graphic visualization.</p>)
         }
-        for (; i <= 100; i++) {
-          setcasseCroute((casseCroute) => [
-            ...casseCroute,
-            <div className="empty"></div>,
-          ])
+        else
+        {
+          let i = 0
+          setVisuTopText(<p className="product_text">1 Block = 1%</p>)
+          for (; i < countryPercentage; i++) {
+            setcasseCroute((casseCroute) => [
+              ...casseCroute,
+              <div className="fill"></div>,
+            ])
+          }
+          for (; i <= 100; i++) {
+            setcasseCroute((casseCroute) => [
+              ...casseCroute,
+              <div className="empty"></div>,
+            ])
+          }
         }
       })
       .catch((err) => console.log(err))
   }, [props.isactive, props.move])
+
+
+  // Top Charts Data GET
+  useEffect(() => {
+    let query = "http://localhost:4000/gettopcharts?decade=" + decade
+    fetch(query)
+      .then((response) => response.json())
+      .then((data) => 
+      {
+          setTopChartsData(data)
+          console.log(data)
+      }
+      )
+      .catch((err) => console.log(err))
+  }, [props.isactive, props.move])
+
 
   if (props.data != null) {
     // Create array of genres
@@ -143,7 +170,7 @@ function CountryDetails(props) {
             {country} in {decade}
           </h1>
           <h3>• Number of produced albums compared to the rest of the world</h3>
-          <p className="product_text">1 unit = 1%</p>
+          {visuTopText}
           <div className="product-albums-container">{casseCroute}</div>
           <h3>• Most produced genres</h3>
           <table>
@@ -161,6 +188,7 @@ function CountryDetails(props) {
           </table>
         </div>
         <div className={curTab === 0 ? "hidden" : "null"}>
+          <h1></h1>
           <h2>Hello world^^</h2>
         </div>
       </div>
