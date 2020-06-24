@@ -22,7 +22,8 @@ function CountryDetails(props) {
     "Rock",
   ]
   let [casseCroute, setcasseCroute] = useState([])
-  let [curTab,setTab] = useState(0)
+  let [visuTopText, setVisuTopText] = useState('')
+  let [curTab,setTab] = useState(<p class="product_text"></p>)
   let genres = []
   let genresTest = []
   let percentage = []
@@ -45,6 +46,7 @@ function CountryDetails(props) {
     fetch(query)
       .then((response) => response.json())
       .then((data) => {
+        setVisuTopText('')
         setcasseCroute([])
         nbrAlbumsTotal = data.total == null ? 1 : data.total
         countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
@@ -55,6 +57,7 @@ function CountryDetails(props) {
         else
         {
           let i = 0
+          setVisuTopText(<p class="product_text">1 Block = 1%</p>)
           for (; i < countryPercentage; i++) {
             setcasseCroute((casseCroute) => [
               ...casseCroute,
@@ -150,7 +153,7 @@ function CountryDetails(props) {
             {country} in {decade}
           </h1>
           <h3>• Number of produced albums compared to the rest of the world</h3>
-          <p className="product_text">1 unit = 1%</p>
+          {visuTopText}
           <div className="product-albums-container">{casseCroute}</div>
           <h3>• Most produced genres</h3>
           <table>
