@@ -22,12 +22,22 @@ function CountryDetails(props) {
     "Rock",
   ]
   let [casseCroute, setcasseCroute] = useState([])
+  let [curTab,setTab] = useState(0)
   let genres = []
   let genresTest = []
   let percentage = []
   let nbrAlbumsTotal = 1
   let countryPercentage
   let nbrAlbums
+
+  let handleNav = (target) =>{
+    if (target === 0){
+      setTab(0)
+    }
+    else{
+      setTab(1)
+    }
+  }
 
   // Hook
   useEffect(() => {
@@ -115,39 +125,44 @@ function CountryDetails(props) {
     <div className={props.isactive ? null : "hidden"}>
       <div className="country-modal">
         <div className="modal-menu">
-          <div className="modal-menu-item active">
+          <div onClick={()=>{handleNav(0)}} className={curTab === 0 ? "modal-menu-item active" : "modal-menu-item"}>
             <h1>DATA</h1>
           </div>
-          <div className="modal-menu-item">
+          <div onClick={()=>{handleNav(1)}} className={curTab === 1 ? "modal-menu-item active" : "modal-menu-item"}>
             <h1>charts</h1>
           </div>
         </div>
-        <img
-          className="close-modal"
-          onClick={props.closemodal}
-          src={closeButton}
-          alt="close"
-        />
-        <h1>
-          {country} in {decade}
-        </h1>
-        <h3>• Number of produced albums compared to the rest of the world</h3>
-        <p class="product_text">1 unit = 1%</p>
-        <div className="product-albums-container">{casseCroute}</div>
-        <h3>• Most produced genres</h3>
-        <table>
-          <thead className="line-separator"></thead>
-          <tbody className="genres-container">
-            <tr>
-              <th className="type-colors" scope="col"></th>
-              <th className="music-type" scope="col"></th>
-              <th className="music-value" scope="col"></th>
-              <th scope="col"></th>
-              <th className="albums" scope="col"></th>
-            </tr>
-            {tablePrint}
-          </tbody>
-        </table>
+        <div className={curTab === 1 ? "hidden" : "null"}>
+          <img
+            className="close-modal"
+            onClick={props.closemodal}
+            src={closeButton}
+            alt="close"
+          />
+          <h1>
+            {country} in {decade}
+          </h1>
+          <h3>• Number of produced albums compared to the rest of the world</h3>
+          <p className="product_text">1 unit = 1%</p>
+          <div className="product-albums-container">{casseCroute}</div>
+          <h3>• Most produced genres</h3>
+          <table>
+            <thead className="line-separator"></thead>
+            <tbody className="genres-container">
+              <tr>
+                <th className="type-colors" scope="col"></th>
+                <th className="music-type" scope="col"></th>
+                <th className="music-value" scope="col"></th>
+                <th scope="col"></th>
+                <th className="albums" scope="col"></th>
+              </tr>
+              {tablePrint}
+            </tbody>
+          </table>
+        </div>
+        <div className={curTab === 0 ? "hidden" : "null"}>
+          <h2>Hello world^^</h2>
+        </div>
       </div>
     </div>
   )
