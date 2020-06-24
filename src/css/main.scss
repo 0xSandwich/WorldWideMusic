@@ -30,13 +30,13 @@ $main-color: #5855ff;
   box-sizing: border-box;
   font-family: "Europa-Regular";
   &::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
   &::-moz-scrollbar {
-    display: none;
+    display: none !important;
   }
   &::-ms-scrollbar {
-    display: none;
+    display: none !important;
   }
 }
 

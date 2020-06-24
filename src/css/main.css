@@ -16,11 +16,11 @@
   box-sizing: border-box;
   font-family: "Europa-Regular"; }
   *::-webkit-scrollbar {
-    display: none; }
+    display: none !important; }
   *::-moz-scrollbar {
-    display: none; }
+    display: none !important; }
   *::-ms-scrollbar {
-    display: none; }
+    display: none !important; }
 
 body {
   background: #221f2e;
