@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import genderColors from "../assets/GenderColors"
 import productAlbums from "../assets/images/productAlbums.svg"
 import closeButton from "../assets/images/close.svg"
-import DecadeInput from "./DecadeInput.js";
+import DecadeInput from "./DecadeInput.js"
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -21,7 +21,7 @@ function CountryDetails(props) {
     "Reggae",
     "Rock",
   ]
-  let [casseCroute, setcasseCroute] = useState([]);
+  let [casseCroute, setcasseCroute] = useState([])
   let genres = []
   let genresTest = []
   let percentage = []
@@ -30,26 +30,30 @@ function CountryDetails(props) {
   let nbrAlbums
 
   // Hook
-    useEffect(() => {
-        let query = "http://localhost:4000/getalbumworld?decade="+decade
-              fetch(query)
-              .then(response => response.json())
-              .then((data)=> 
-              {
-                setcasseCroute([])
-                nbrAlbumsTotal = data.total == null ? 1 : data.total
-                countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-                let i = 0
-                for (; i < countryPercentage; i++)
-                {
-                  setcasseCroute((casseCroute) => [...casseCroute, <div className="fill"></div>])
-                }
-                for (; i <= 100; i++) {
-                  setcasseCroute((casseCroute) => [...casseCroute, <div className="empty"></div>])
-                }
-              })
-              .catch(err => console.log(err));  
-      }, [props.isactive, props.move])
+  useEffect(() => {
+    let query = "http://localhost:4000/getalbumworld?decade=" + decade
+    fetch(query)
+      .then((response) => response.json())
+      .then((data) => {
+        setcasseCroute([])
+        nbrAlbumsTotal = data.total == null ? 1 : data.total
+        countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
+        let i = 0
+        for (; i < countryPercentage; i++) {
+          setcasseCroute((casseCroute) => [
+            ...casseCroute,
+            <div className="fill"></div>,
+          ])
+        }
+        for (; i <= 100; i++) {
+          setcasseCroute((casseCroute) => [
+            ...casseCroute,
+            <div className="empty"></div>,
+          ])
+        }
+      })
+      .catch((err) => console.log(err))
+  }, [props.isactive, props.move])
 
   if (props.data != null) {
     // Create array of genres
@@ -67,14 +71,15 @@ function CountryDetails(props) {
       props.data[0].rock
     )
 
-
     // Albums number
     nbrAlbums = genres.reduce((pv, cv) => pv + cv, 0)
 
     // Create array and calc percentage of all styles
     genres.map((element, key) =>
       // Handle NaN percentage issues
-      nbrAlbums == 0 ? percentage.push(0) : percentage.push(Math.round((element / nbrAlbums) * 100))
+      nbrAlbums == 0
+        ? percentage.push(0)
+        : percentage.push(Math.round((element / nbrAlbums) * 100))
     )
 
     // Sort by percent
@@ -83,8 +88,7 @@ function CountryDetails(props) {
   }
 
   // Print the table of Most produced genres
-  let tablePrint = colors.map((element, key) => 
-  (
+  let tablePrint = colors.map((element, key) => (
     <tr key={key + Math.random()}>
       <th scope="row" key={key + Math.random()}>
         <div
@@ -106,7 +110,6 @@ function CountryDetails(props) {
       </th>
     </tr>
   ))
-  
 
   return (
     <div className={props.isactive ? null : "hidden"}>
@@ -130,9 +133,7 @@ function CountryDetails(props) {
         </h1>
         <h3>• Number of produced albums compared to the rest of the world</h3>
         <p class="product_text">1 unit = 1%</p>
-        <div className="product-albums-container">
-            {casseCroute}
-        </div>
+        <div className="product-albums-container">{casseCroute}</div>
         <h3>• Most produced genres</h3>
         <table>
           <thead className="line-separator"></thead>
