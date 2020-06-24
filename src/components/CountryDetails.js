@@ -22,7 +22,15 @@ function CountryDetails(props) {
   ]
   let [casseCroute, setcasseCroute] = useState([])
   let [visuTopText, setVisuTopText] = useState('')
-  let [topChartsData, setTopChartsData] = useState({})
+  // Top Charts Info states (dirty code...)
+  let [topChartsRank, setTopChartsRank] = useState([])
+  let [topChartsArtist, setTopChartsArtist] = useState([])
+  let [topChartsGenre, setTopChartsGenre] = useState([])
+  let [topChartsAlbum, setTopChartsAlbum] = useState([])
+  let [topChartsAppleMusic, setTopChartsAppleMusic] = useState([])
+  let [topChartsSpotify, setTopChartsSpotify] = useState([])
+  
+
   let [curTab,setTab] = useState(0)
   let genres = []
   let percentage = []
@@ -58,10 +66,7 @@ function CountryDetails(props) {
           let i = 0
           setVisuTopText(<p className="product_text">1 Block = 1%</p>)
           for (; i < countryPercentage; i++) {
-            setcasseCroute((casseCroute) => [
-              ...casseCroute,
-              <div className="fill" key={uuidv4()}></div>,
-            ])
+            setcasseCroute((casseCroute) => [...casseCroute,<div className="fill" key={uuidv4()}></div>,])
           }
           for (; i < 100; i++) {
             setcasseCroute((casseCroute) => [
@@ -72,24 +77,54 @@ function CountryDetails(props) {
         }
       })
       .catch((err) => console.log(err))
+        let rank = ''
+        let album = ''
+        let applemusic = ''
+        let spotify = ''
+        let artist = ''
+        let genre = ''
+        query = "http://localhost:4000/gettopcharts?decade=" + decade
+        fetch(query)
+          .then((response) => response.json())
+          .then((data) => 
+          {
+              setTopChartsRank([])
+              setTopChartsAlbum([])
+              setTopChartsAppleMusic([])
+              setTopChartsSpotify([])
+              for (let j = 0; j < 5; j++) {
+                rank = data.data[j].rank
+                album = data.data[j].album
+                artist = data.data[j].artist
+                genre = data.data[j].genre
+                applemusic = data.data[j].applemusic
+                spotify = data.data[j].spotify
+                setTopChartsRank((topChartsRank) => [...topChartsRank, rank,])
+                setTopChartsArtist((topChartsArtist) => [...topChartsArtist, artist,])
+                setTopChartsGenre((topChartsGenre) => [...topChartsGenre, genre,])
+                setTopChartsAlbum((topChartsAlbum) => [...topChartsAlbum, album,])
+                setTopChartsAppleMusic((topChartsAppleMusic) => [...topChartsAppleMusic, applemusic,])
+                setTopChartsSpotify((topChartsSpotify) => [...topChartsSpotify, spotify,])
+              }
+          }
+          )
+          .catch((err) => console.log(err))
   }, [props.isactive, props.move])
 
 
-  // Top Charts Data GET
-  useEffect(() => {
-    let query = "http://localhost:4000/gettopcharts?decade=" + decade
-    fetch(query)
-      .then((response) => response.json())
-      .then((data) => 
-      {
-          setTopChartsData(data.data)
-          // console.log(data)
-          // console.log(data.data[0])
-      }
-      )
-      .catch((err) => console.log(err))
-  }, [decade]) // Old values : props.isactive, props.move, decade | Now only reloading at a decade change
-  //console.log(topChartsData)
+  // // Top Charts Data GET
+  // useEffect(() => {
+  //   let query = "http://localhost:4000/gettopcharts?decade=" + decade
+  //   fetch(query)
+  //     .then((response) => response.json())
+  //     .then((data) => 
+  //     {
+  //         setTopChartsData(data.data[0].album)
+  //     }
+  //     )
+  //     .catch((err) => console.log(err))
+  // }, [props.isactive, props.move, decade]) // Old values : props.isactive, props.move, decade | Now only reloading at a decade change
+  // //console.log(topChartsData)
 
 
   if (props.data != null) {
@@ -122,6 +157,27 @@ function CountryDetails(props) {
     // Sort by percent
     // percentage.sort(function(a, b){return b-a})
     // genres.sort(function(a, b){return b-a})
+  }
+
+  // console.log(topChartsAlbum)
+  // console.log(topChartsSpotify)
+
+  // Print top charts
+  let topChartsPrint = () =>
+  {
+    let html = []
+    for (let i = 0; i < 5; i++) {
+      html.push(
+      <div className="topcharts" key={uuidv4()}>
+        <div className="rank" key={uuidv4()}>{topChartsRank[i]}</div>
+        <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
+        <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
+        <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div>
+      </div>)
+      // html.push(<iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src={`https://embed.music.apple.com/us/album/${topChartsAppleMusic[i]}?app=music`} height="450" frameBorder="0"></iframe>)
+      // html.push(<p key={uuidv4()}>{<iframe src={`https://open.spotify.com/embed/album/${topChartsSpotify[i]}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>}</p>)
+    }
+    return html
   }
 
   // Print the table of Most produced genres
@@ -191,9 +247,7 @@ function CountryDetails(props) {
         </div>
         <div className={curTab === 0 ? "hidden" : "modal-content"}>
           <h1>TOP CHARTS</h1>
-            {/* <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/the-essential-george-duke/303520281?app=music" height="450" frameBorder="0"></iframe>
-            <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> */}
-            <div>Test text</div>
+            {topChartsPrint()}
         </div>
       </div>
     </div>
