@@ -25,7 +25,6 @@ function CountryDetails(props) {
   let [curTab,setTab] = useState(0)
   let genres = []
   let percentage = []
-  let nbrAlbumsTotal = 1
   let countryPercentage
   let nbrAlbums
 
@@ -40,6 +39,7 @@ function CountryDetails(props) {
 
   // Hook to Get Worldwide stats
   useEffect(() => {
+    let nbrAlbumsTotal;
     let query = "http://localhost:4000/getalbumworld?decade=" + decade
     fetch(query)
       .then((response) => response.json())
@@ -48,7 +48,7 @@ function CountryDetails(props) {
         setcasseCroute([])
         nbrAlbumsTotal = data.total == null ? 1 : data.total
         countryPercentage = Math.round((nbrAlbums / nbrAlbumsTotal) * 100)
-        if(countryPercentage == 0)
+        if(countryPercentage === 0)
         {
           setcasseCroute(<p className="product_text">This country only produced less than 1% needed to be printed on the graphic visualization.</p>)
         }
@@ -112,7 +112,7 @@ function CountryDetails(props) {
     // Create array and calc percentage of all styles
     genres.map((element, key) =>
       // Handle NaN percentage issues
-      nbrAlbums == 0
+      nbrAlbums === 0
         ? percentage.push(0)
         : percentage.push(Math.round((element / nbrAlbums) * 100))
     )
