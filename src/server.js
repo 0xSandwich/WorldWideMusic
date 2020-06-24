@@ -21,6 +21,22 @@ connection.connect(err => {
 
 app.use(cors());
 
+// Get Top Albums
+app.get('/gettopcharts', (req,res) =>{
+    const decade = req.query
+    const SELECT_COUNTRY = `SELECT * FROM topalbums WHERE decade = '${decade}'`
+    connection.query(SELECT_COUNTRY, (err, results) => {
+        if (err){ 
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    })
+})
+
 app.get('/getcountry', (req,res) =>{
     const {decade, country} = req.query
     const SELECT_COUNTRY = `SELECT * FROM albums WHERE decade = '${decade}' AND country='${country}' `
@@ -35,6 +51,9 @@ app.get('/getcountry', (req,res) =>{
         }
     })
 })
+
+
+
 // Get best genre by country
 
 app.get('/getbestgenre',(req,res) => {
