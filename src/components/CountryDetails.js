@@ -24,7 +24,7 @@ function CountryDetails(props) {
   let [casseCroute, setcasseCroute] = useState([])
   let [visuTopText, setVisuTopText] = useState('')
   let [topChartsData, setTopChartsData] = useState({})
-  let [curTab,setTab] = useState(<p class="product_text"></p>)
+  let [curTab,setTab] = useState(0)
   let genres = []
   let genresTest = []
   let percentage = []
@@ -85,7 +85,8 @@ function CountryDetails(props) {
       .then((data) => 
       {
           setTopChartsData(data)
-          console.log(data)
+          // console.log(data)
+          // console.log(data.data[0])
       }
       )
       .catch((err) => console.log(err))
@@ -188,8 +189,10 @@ function CountryDetails(props) {
           </table>
         </div>
         <div className={curTab === 0 ? "hidden" : "null"}>
-          <h1></h1>
-          <h2>Hello world^^</h2>
+          <h1>TOP CHARTS</h1>
+            {/* <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/us/album/the-essential-george-duke/303520281?app=music" height="450" frameBorder="0"></iframe>
+            <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> */}
+            <div>Test text</div>
         </div>
       </div>
     </div>
