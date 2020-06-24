@@ -159,14 +159,16 @@ function CountryDetails(props) {
           <div onClick={()=>{handleNav(1)}} className={curTab === 1 ? "modal-menu-item active" : "modal-menu-item"}>
             <h1>charts</h1>
           </div>
+          <div className="close-modal-container">
+            <img
+              className="close-modal"
+              onClick={props.closemodal}
+              src={closeButton}
+              alt="close"
+            />
+          </div>
         </div>
         <div className={curTab === 1 ? "hidden" : "modal-content"}>
-          <img
-            className="close-modal"
-            onClick={props.closemodal}
-            src={closeButton}
-            alt="close"
-          />
           <h1>
             {country} in {decade}
           </h1>

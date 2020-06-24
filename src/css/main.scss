@@ -523,7 +523,7 @@ COUNTRY DETAILS
   z-index: 500;
   background: rgba(46, 43, 64, 0.9);
   border-radius: 30px 30px 30px 30px;
-  padding: 30px 45px 0px 45px;
+  padding: 0px 45px 0px 45px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -535,28 +535,44 @@ COUNTRY DETAILS
   }
   // modal menu
   .modal-menu {
-    margin: 0px -45px 0px -45px;
+    // background-color: green;
+    margin: 0px -45px 15px -45px;
     width: calc(100% + 90px);
+    height: 80px;
     display: flex;
     flex-direction: row;
     h1 {
       width: auto;
       font-size: 16px;
-      margin-bottom: 25px;
+      line-height: 16px;
     }
     &-item {
       width: 50%;
       cursor: pointer;
       height: 100%;
       display: flex;
+      align-items: flex-end;
       justify-content: center;
-      align-items: flex-start;
-      border-bottom: solid 2px transparent;
+      transition: border-bottom 2s;
+      border-bottom: solid 2px rgba(128, 128, 128, 0.3);
       h1 {
         color: $link-inactive-color;
       }
     }
+    .close-modal-container{
+      // background-color: red;
+      display: flex;
+      justify-content: center;
+      border-bottom: solid 2px rgba(128, 128, 128, 0.3);
+      width: 90px;
+      height: 100%;
+      .close-modal {
+        width: 18px;
+        cursor: pointer;
+      }
+    }
     .active {
+      transition: border-bottom 2s;
       border-bottom: solid 2px $main-color;
       h1 {
         color: white;
@@ -580,13 +596,6 @@ COUNTRY DETAILS
     width: 90%;
     font-size: 26px;
     line-height: 30px;
-  }
-  .close-modal {
-    position: absolute;
-    right: 35px;
-    top: 38px;
-    width: 14px;
-    cursor: pointer;
   }
 
   .product-albums-container {
