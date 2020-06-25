@@ -64,7 +64,7 @@ function CountryDetails(props) {
   useEffect(() => {
     let nbrAlbumsTotal
     let countryPercentage
-    let query = "http://localhost:4000/getalbumworld?decade=" + decade
+    let query = "http://sandbox.matthieuvidal.fr:4000/getalbumworld?decade=" + decade
     fetch(query)
       .then((response) => response.json())
       .then((data) => {
@@ -100,7 +100,7 @@ function CountryDetails(props) {
         let genre = ''
         let appleplay = ''
         let spotplay = ''
-        query = "http://localhost:4000/gettopcharts?decade=" + decade
+        query = "http://sandbox.matthieuvidal.fr:4000/gettopcharts?decade=" + decade
         fetch(query)
           .then((response) => response.json())
           .then((data) => 
@@ -138,7 +138,7 @@ function CountryDetails(props) {
 
   // // Top Charts Data GET
   // useEffect(() => {
-  //   let query = "http://localhost:4000/gettopcharts?decade=" + decade
+  //   let query = "http://sandbox.matthieuvidal.fr:4000/gettopcharts?decade=" + decade
   //   fetch(query)
   //     .then((response) => response.json())
   //     .then((data) => 

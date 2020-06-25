@@ -27,7 +27,7 @@ export default class Map extends Component {
     move = false
     // Get album info for the clicked country
     getAlbum=(country,target)=>{
-        let query = `http://localhost:4000/getcountry?decade=${this.curDecade}&country=${country}`
+        let query = `http://sandbox.matthieuvidal.fr:4000/getcountry?decade=${this.curDecade}&country=${country}`
         fetch(query)
         .then(response => response.json())
         .then(({data})=> {
@@ -193,7 +193,7 @@ export default class Map extends Component {
             polygon.states.removeKey("hover")
         }
         this.countryColors={}
-        let query = "http://localhost:4000/getbestgenre?decade="+this.curDecade
+        let query = "http://sandbox.matthieuvidal.fr:4000/getbestgenre?decade="+this.curDecade
         fetch(query)
         .then(response => response.json())
         .then((data)=> { // ici tu destructures donc c'est normal que ca renvoie undefined
