@@ -184,7 +184,7 @@ function CountryDetails(props) {
   // console.log(topChartsSpotify)
 
   // Handle click on applemusic / spotify
-  let playerClic = (i) =>
+  let playerClicAppleMusic = (i) =>
   {
     setCurrentI(i)
     if (isAppleClicked)
@@ -197,6 +197,10 @@ function CountryDetails(props) {
       setIsAppleClicked(true)
       setSelectedPlayer(appleMusicPlayer[i])
     }
+  }
+  let playerClicSpotify = (i) =>
+  {
+    setCurrentI(i)
     if (isSpotifyClicked)
     {
       setIsSpotifyClicked(false)
@@ -221,8 +225,8 @@ function CountryDetails(props) {
         <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
         <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
         <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div>
-        <div className="spotify-btn" onClick= {() => playerClic(i)} key={uuidv4()}>SPOTIFY</div>
-        <div className="applemusic-btn" onClick= {() => playerClic(i)} key={uuidv4()}>APPLEMUSIC</div>
+        <div className="spotify-btn" onClick= {() => playerClicSpotify(i)} key={uuidv4()}>SPOTIFY</div>
+        <div className="applemusic-btn" onClick= {() => playerClicAppleMusic(i)} key={uuidv4()}>APPLEMUSIC</div>
       </div>)
       i === currentI ? html.push(<div className="player">{selectedPlayer}</div>) : html.push(<div className="player"></div>)
     }
