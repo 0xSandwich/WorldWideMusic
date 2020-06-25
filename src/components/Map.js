@@ -238,7 +238,7 @@ export default class Map extends Component {
 
         // Configure series
         let polygonTemplate = polygonSeries.mapPolygons.template;
-        polygonTemplate.tooltipText = "{name} :)";
+        polygonTemplate.tooltipText = "{name}";
         polygonTemplate.strokeWidth=0
         polygonTemplate.strokeOpacity=0
         polygonTemplate.fill = am4core.color("#514E61");
