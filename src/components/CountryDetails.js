@@ -106,6 +106,7 @@ function CountryDetails(props) {
           .then((data) => 
           {
               setTopChartsRank([])
+              setTopChartsArtist([])
               setTopChartsAlbum([])
               setTopChartsAppleMusic([])
               setTopChartsSpotify([])
