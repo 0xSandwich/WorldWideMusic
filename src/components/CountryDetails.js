@@ -238,7 +238,7 @@ function CountryDetails(props) {
           </div>
         </div>
       </div>)
-      i === currentI ? html.push(<div className="player">{selectedPlayer}</div>) : html.push(<div className="player"></div>)
+      i === currentI ? html.push(<div className="player" key={uuidv4()}>{selectedPlayer}</div>) : html.push(<div className="player"></div>)
     }
     return html
   }
