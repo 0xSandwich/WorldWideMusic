@@ -183,7 +183,7 @@ function CountryDetails(props) {
 
   // Print the table of Most produced genres
   let tablePrint = colors.map((element, key) => (
-    <tr key={uuidv4()}>
+    <tr  key={uuidv4()}>
       <th scope="row" key={uuidv4()}>
         <div
           className="modal-genre-color"
