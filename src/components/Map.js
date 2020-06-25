@@ -359,6 +359,10 @@ export default class Map extends Component {
             let color = Object.entries(this.countryColors)[i][1]
             let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
             if(polygon != null){
+                
+                let tableTemp = lodash.invertBy(genderColors)
+                let genre = tableTemp[color][0]
+                polygon.tooltipText="{name} : "+genre.charAt(0).toUpperCase() + genre.slice(1)
                 let hs = polygon.states.create("hover");
                 hs.properties.fill = am4core.color(color);
                 let as = polygon.states.create("enable");
