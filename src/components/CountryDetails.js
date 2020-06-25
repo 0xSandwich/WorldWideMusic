@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import genderColors from "../assets/GenderColors"
 import { v4 as uuidv4 } from 'uuid';
 import closeButton from "../assets/images/close.svg"
+import spotifyButton from "../assets/images/spotify.svg"
+import appleButton from "../assets/images/apple.svg"
 
 function CountryDetails(props) {
   let colors = Object.entries(genderColors)
@@ -116,8 +118,8 @@ function CountryDetails(props) {
                 genre = data.data[j].genre
                 applemusic = data.data[j].applemusic
                 spotify = data.data[j].spotify
-                appleplay = <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src={`https://embed.music.apple.com/us/album/${applemusic}?app=music`} height="450" frameBorder="0"></iframe>
-                spotplay = <iframe src={`https://open.spotify.com/embed/album/${spotify}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                appleplay = <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src={`https://embed.music.apple.com/us/album/${applemusic}?app=music`} height="450" width="420" background="transparent" frameBorder="0"></iframe>
+                spotplay = <iframe src={`https://open.spotify.com/embed/album/${spotify}`} width="420" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                 setTopChartsRank((topChartsRank) => [...topChartsRank, rank,])
                 setTopChartsArtist((topChartsArtist) => [...topChartsArtist, artist,])
                 setTopChartsGenre((topChartsGenre) => [...topChartsGenre, genre,])
@@ -220,13 +222,17 @@ function CountryDetails(props) {
     for (let i = 0; i < 5; i++) {
       html.push(
       <div className="topcharts" key={uuidv4()}>
-        <img className="cover" key={uuidv4()} src={`https://sandbox.matthieuvidal.fr/wwmserv/img/covers/${topChartsSpotify[i]}.jpg`}></img>
         <div className="rank" key={uuidv4()}>{topChartsRank[i]}</div>
-        <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
-        <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
-        <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div>
-        <div className="spotify-btn" onClick= {() => playerClicSpotify(i)} key={uuidv4()}>SPOTIFY</div>
-        <div className="applemusic-btn" onClick= {() => playerClicAppleMusic(i)} key={uuidv4()}>APPLEMUSIC</div>
+        <img className="cover" key={uuidv4()} src={`https://sandbox.matthieuvidal.fr/wwmserv/img/covers/${topChartsSpotify[i]}.jpg`}></img>
+        <div className ="informations_container">
+          <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
+          <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
+          {/* <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div> */}
+          <div className="button_container">
+            <div className="spotify-btn" onClick= {() => playerClicSpotify(i)} key={uuidv4()}><img src={spotifyButton}></img></div>
+            <div className="applemusic-btn" onClick= {() => playerClicAppleMusic(i)} key={uuidv4()}><img src={appleButton}></img></div>
+          </div>
+        </div>
       </div>)
       i === currentI ? html.push(<div className="player">{selectedPlayer}</div>) : html.push(<div className="player"></div>)
     }
