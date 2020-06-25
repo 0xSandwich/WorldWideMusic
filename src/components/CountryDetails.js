@@ -190,29 +190,31 @@ function CountryDetails(props) {
   let playerClicAppleMusic = (i) =>
   {
     setCurrentI(i)
-    if (isAppleClicked)
-    {
-      setIsAppleClicked(false)
-      setSelectedPlayer(appleMusicPlayer[i])
-    }
-    else if (!isAppleClicked)
+    if (!isAppleClicked || isSpotifyClicked)
     {
       setIsAppleClicked(true)
+      setIsSpotifyClicked(false)
       setSelectedPlayer(appleMusicPlayer[i])
+    }
+    else
+    {
+      setIsAppleClicked(false)
+      setSelectedPlayer([])
     }
   }
   let playerClicSpotify = (i) =>
   {
     setCurrentI(i)
-    if (isSpotifyClicked)
-    {
-      setIsSpotifyClicked(false)
-      setSelectedPlayer(spotifyPlayer[i])
-    }
-    else if (!isSpotifyClicked)
+    if (!isSpotifyClicked || isAppleClicked)
     {
       setIsSpotifyClicked(true)
+      setIsAppleClicked(false)
       setSelectedPlayer(spotifyPlayer[i])
+    }
+    else
+    {
+      setIsSpotifyClicked(false)
+      setSelectedPlayer([])
     }
   }
 
@@ -306,7 +308,7 @@ function CountryDetails(props) {
           </table>
         </div>
         <div className={curTab === 0 ? "hidden" : "modal-content"}>
-          <h1>TOP CHARTS</h1>
+          <h1>WORLDWIDE TOP ALBUMS</h1>
             {topChartsPrint()}
         </div>
       </div>
