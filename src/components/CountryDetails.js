@@ -29,7 +29,20 @@ function CountryDetails(props) {
   let [topChartsAlbum, setTopChartsAlbum] = useState([])
   let [topChartsAppleMusic, setTopChartsAppleMusic] = useState([])
   let [topChartsSpotify, setTopChartsSpotify] = useState([])
+
+  // Spotify / AppleMusic btn click handler
+  let [isAppleClicked, setIsAppleClicked] = useState(false)
+  let [isSpotifyClicked, setIsSpotifyClicked] = useState(false)
+
+  // Spotify Apple Music Players
+  let [spotifyPlayer, setSpotifyPlayer] = useState([])
+  let [appleMusicPlayer, setAppleMusicPlayer] = useState([])
+
+  // Selected state player
+  let [selectedPlayer, setSelectedPlayer] = useState([])
+  let [currentI, setCurrentI] = useState(0)
   
+
 
   let [curTab,setTab] = useState(0)
   let genres = []
@@ -83,6 +96,8 @@ function CountryDetails(props) {
         let spotify = ''
         let artist = ''
         let genre = ''
+        let appleplay = ''
+        let spotplay = ''
         query = "http://localhost:4000/gettopcharts?decade=" + decade
         fetch(query)
           .then((response) => response.json())
@@ -92,6 +107,8 @@ function CountryDetails(props) {
               setTopChartsAlbum([])
               setTopChartsAppleMusic([])
               setTopChartsSpotify([])
+              setAppleMusicPlayer([])
+              setSpotifyPlayer([])
               for (let j = 0; j < 5; j++) {
                 rank = data.data[j].rank
                 album = data.data[j].album
@@ -99,12 +116,16 @@ function CountryDetails(props) {
                 genre = data.data[j].genre
                 applemusic = data.data[j].applemusic
                 spotify = data.data[j].spotify
+                appleplay = <iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src={`https://embed.music.apple.com/us/album/${applemusic}?app=music`} height="450" frameBorder="0"></iframe>
+                spotplay = <iframe src={`https://open.spotify.com/embed/album/${spotify}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                 setTopChartsRank((topChartsRank) => [...topChartsRank, rank,])
                 setTopChartsArtist((topChartsArtist) => [...topChartsArtist, artist,])
                 setTopChartsGenre((topChartsGenre) => [...topChartsGenre, genre,])
                 setTopChartsAlbum((topChartsAlbum) => [...topChartsAlbum, album,])
                 setTopChartsAppleMusic((topChartsAppleMusic) => [...topChartsAppleMusic, applemusic,])
                 setTopChartsSpotify((topChartsSpotify) => [...topChartsSpotify, spotify,])
+                setAppleMusicPlayer((appleMusicPlayer) => [...appleMusicPlayer, appleplay,])
+                setSpotifyPlayer((spotifyPlayer) => [...spotifyPlayer, spotplay,])
               }
           }
           )
@@ -162,6 +183,32 @@ function CountryDetails(props) {
   // console.log(topChartsAlbum)
   // console.log(topChartsSpotify)
 
+  // Handle click on applemusic / spotify
+  let playerClic = (i) =>
+  {
+    setCurrentI(i)
+    if (isAppleClicked)
+    {
+      setIsAppleClicked(false)
+      setSelectedPlayer(appleMusicPlayer[i])
+    }
+    else if (!isAppleClicked)
+    {
+      setIsAppleClicked(true)
+      setSelectedPlayer(appleMusicPlayer[i])
+    }
+    if (isSpotifyClicked)
+    {
+      setIsSpotifyClicked(false)
+      setSelectedPlayer(spotifyPlayer[i])
+    }
+    else if (!isSpotifyClicked)
+    {
+      setIsSpotifyClicked(true)
+      setSelectedPlayer(spotifyPlayer[i])
+    }
+  }
+
   // Print top charts
   let topChartsPrint = () =>
   {
@@ -174,9 +221,10 @@ function CountryDetails(props) {
         <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
         <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
         <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div>
+        <div className="spotify-btn" onClick= {() => playerClic(i)} key={uuidv4()}>SPOTIFY</div>
+        <div className="applemusic-btn" onClick= {() => playerClic(i)} key={uuidv4()}>APPLEMUSIC</div>
       </div>)
-      // html.push(<iframe allow="autoplay *; encrypted-media *;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src={`https://embed.music.apple.com/us/album/${topChartsAppleMusic[i]}?app=music`} height="450" frameBorder="0"></iframe>)
-      // html.push(<p key={uuidv4()}>{<iframe src={`https://open.spotify.com/embed/album/${topChartsSpotify[i]}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>}</p>)
+      i === currentI ? html.push(<div className="player">{selectedPlayer}</div>) : html.push(<div className="player"></div>)
     }
     return html
   }
