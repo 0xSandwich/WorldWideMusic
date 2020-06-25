@@ -556,7 +556,8 @@ MOST PRODUCTED GENRE
     width: 90px;
     height: 90px;
     margin-right: 20px;
-    margin-left: 40px; }
+    margin-left: 40px;
+    border-radius: 8px; }
   .topcharts .informations_container {
     width: 250px;
     height: 110px;
