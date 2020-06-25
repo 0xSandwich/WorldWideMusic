@@ -64,7 +64,7 @@ function CountryDetails(props) {
   useEffect(() => {
     let nbrAlbumsTotal
     let countryPercentage
-    let query = "http://sandbox.matthieuvidal.fr:4000/getalbumworld?decade=" + decade
+    let query = "https://wwmserv.herokuapp.com/getalbumworld?decade=" + decade
     fetch(query)
       .then((response) => response.json())
       .then((data) => {
@@ -100,7 +100,7 @@ function CountryDetails(props) {
         let genre = ''
         let appleplay = ''
         let spotplay = ''
-        query = "http://sandbox.matthieuvidal.fr:4000/gettopcharts?decade=" + decade
+        query = "https://wwmserv.herokuapp.com/gettopcharts?decade=" + decade
         fetch(query)
           .then((response) => response.json())
           .then((data) => 
@@ -138,7 +138,7 @@ function CountryDetails(props) {
 
   // // Top Charts Data GET
   // useEffect(() => {
-  //   let query = "http://sandbox.matthieuvidal.fr:4000/gettopcharts?decade=" + decade
+  //   let query = "http:https://wwmserv.herokuapp.com//gettopcharts?decade=" + decade
   //   fetch(query)
   //     .then((response) => response.json())
   //     .then((data) => 
@@ -224,7 +224,7 @@ function CountryDetails(props) {
       html.push(
       <div className="topcharts" key={uuidv4()}>
         <div className="rank" key={uuidv4()}>{topChartsRank[i]}</div>
-        <img className="cover" key={uuidv4()} src={`https://sandbox.matthieuvidal.fr/wwmserv/img/covers/${topChartsSpotify[i]}.jpg`}></img>
+        <img className="cover" key={uuidv4()} src={`//sandbox.matthieuvidal.fr/wwmserv/img/covers/${topChartsSpotify[i]}.jpg`}></img>
         <div className ="informations_container">
           <div className="album" key={uuidv4()}>{topChartsAlbum[i]}</div>
           <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>

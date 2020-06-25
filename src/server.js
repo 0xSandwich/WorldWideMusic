@@ -18,8 +18,7 @@ connection.connect(err => {
     }
 })
 
-
-app.use(cors());
+app.use(cors({credentials: true, origin: true}));
 
 // Get Top Albums
 app.get('/gettopcharts', (req,res) =>{
