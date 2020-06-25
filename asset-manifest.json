@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/WorldWideMusic/static/css/main.b98da7ab.chunk.css",
-    "main.js": "/WorldWideMusic/static/js/main.369fa73e.chunk.js",
-    "main.js.map": "/WorldWideMusic/static/js/main.369fa73e.chunk.js.map",
+    "main.css": "/WorldWideMusic/static/css/main.2c79e406.chunk.css",
+    "main.js": "/WorldWideMusic/static/js/main.55ec36fe.chunk.js",
+    "main.js.map": "/WorldWideMusic/static/js/main.55ec36fe.chunk.js.map",
     "runtime-main.js": "/WorldWideMusic/static/js/runtime-main.cd8c4b67.js",
     "runtime-main.js.map": "/WorldWideMusic/static/js/runtime-main.cd8c4b67.js.map",
     "xlsx.js": "/WorldWideMusic/static/js/xlsx.97b7b3d7.chunk.js",
     "xlsx.js.map": "/WorldWideMusic/static/js/xlsx.97b7b3d7.chunk.js.map",
     "static/js/3.2bcea900.chunk.js": "/WorldWideMusic/static/js/3.2bcea900.chunk.js",
     "static/js/3.2bcea900.chunk.js.map": "/WorldWideMusic/static/js/3.2bcea900.chunk.js.map",
-    "static/js/4.1162215c.chunk.js": "/WorldWideMusic/static/js/4.1162215c.chunk.js",
-    "static/js/4.1162215c.chunk.js.map": "/WorldWideMusic/static/js/4.1162215c.chunk.js.map",
+    "static/js/4.96b0d26d.chunk.js": "/WorldWideMusic/static/js/4.96b0d26d.chunk.js",
+    "static/js/4.96b0d26d.chunk.js.map": "/WorldWideMusic/static/js/4.96b0d26d.chunk.js.map",
     "static/js/5.cd68679b.chunk.js": "/WorldWideMusic/static/js/5.cd68679b.chunk.js",
     "static/js/5.cd68679b.chunk.js.map": "/WorldWideMusic/static/js/5.cd68679b.chunk.js.map",
     "static/js/6.0e0edfe9.chunk.js": "/WorldWideMusic/static/js/6.0e0edfe9.chunk.js",
     "static/js/6.0e0edfe9.chunk.js.map": "/WorldWideMusic/static/js/6.0e0edfe9.chunk.js.map",
     "index.html": "/WorldWideMusic/index.html",
-    "precache-manifest.3fc9a1a63ea21a04b6abdbda5078e0fa.js": "/WorldWideMusic/precache-manifest.3fc9a1a63ea21a04b6abdbda5078e0fa.js",
+    "precache-manifest.0f05a16a47f69810ecd861c6cf89222c.js": "/WorldWideMusic/precache-manifest.0f05a16a47f69810ecd861c6cf89222c.js",
     "service-worker.js": "/WorldWideMusic/service-worker.js",
-    "static/css/main.b98da7ab.chunk.css.map": "/WorldWideMusic/static/css/main.b98da7ab.chunk.css.map",
-    "static/js/4.1162215c.chunk.js.LICENSE.txt": "/WorldWideMusic/static/js/4.1162215c.chunk.js.LICENSE.txt",
+    "static/css/main.2c79e406.chunk.css.map": "/WorldWideMusic/static/css/main.2c79e406.chunk.css.map",
+    "static/js/4.96b0d26d.chunk.js.LICENSE.txt": "/WorldWideMusic/static/js/4.96b0d26d.chunk.js.LICENSE.txt",
     "static/js/5.cd68679b.chunk.js.LICENSE.txt": "/WorldWideMusic/static/js/5.cd68679b.chunk.js.LICENSE.txt",
     "static/js/6.0e0edfe9.chunk.js.LICENSE.txt": "/WorldWideMusic/static/js/6.0e0edfe9.chunk.js.LICENSE.txt",
     "static/media/main.css": "/WorldWideMusic/static/media/wave.37b4b247.svg",
@@ -42,8 +42,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.cd8c4b67.js",
-    "static/js/4.1162215c.chunk.js",
-    "static/css/main.b98da7ab.chunk.css",
-    "static/js/main.369fa73e.chunk.js"
+    "static/js/4.96b0d26d.chunk.js",
+    "static/css/main.2c79e406.chunk.css",
+    "static/js/main.55ec36fe.chunk.js"
   ]
 }
