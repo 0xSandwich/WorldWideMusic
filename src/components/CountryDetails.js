@@ -129,6 +129,7 @@ function CountryDetails(props) {
                 setTopChartsSpotify((topChartsSpotify) => [...topChartsSpotify, spotify,])
                 setAppleMusicPlayer((appleMusicPlayer) => [...appleMusicPlayer, appleplay,])
                 setSpotifyPlayer((spotifyPlayer) => [...spotifyPlayer, spotplay,])
+                setSelectedPlayer([])
               }
           }
           )
