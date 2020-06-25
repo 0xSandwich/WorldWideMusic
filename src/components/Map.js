@@ -120,7 +120,7 @@ export default class Map extends Component {
     selectPolygon = (country,polygon) => {
         this.clearPrevPolygon()
         if (this.morphedPolygon !== polygon) {
-            var animation = this.pieSeries.hide();
+            let animation = this.pieSeries.hide();
             if (animation) {
                 animation.events.on("animationended", function () {
                     this.morphToCircle(country,polygon);
@@ -133,7 +133,7 @@ export default class Map extends Component {
     }
     // Morph polygon (country) to pie chart
     morphToCircle = (country,polygon) => {
-        var animationDuration = polygon.polygon.morpher.morphDuration;
+        let animationDuration = polygon.polygon.morpher.morphDuration;
         this.countryclicked=true
         this.forceUpdate()
         polygon.toFront();
@@ -155,7 +155,7 @@ export default class Map extends Component {
             this.forceUpdate()
     }
     zoomToCountry = (country,polygon) => {
-        var zoomAnimation = this.map.zoomToMapObject(polygon, 2.2, true);
+        let zoomAnimation = this.map.zoomToMapObject(polygon, 2.2, true);
         if (zoomAnimation) {
             zoomAnimation.events.on("animationended", function () {
                 this.showPieChart(country,polygon);
@@ -270,7 +270,7 @@ export default class Map extends Component {
           polygonSeries.dataFields.zoomGeoPoint = "zoomGeoPoint";
 
         // desaturate filter for countries
-        var desaturateFilter = new am4core.DesaturateFilter();
+        let desaturateFilter = new am4core.DesaturateFilter();
         desaturateFilter.saturation = 1;
         polygonTemplate.filters.push(desaturateFilter);
 
@@ -296,7 +296,7 @@ export default class Map extends Component {
         this.mapSeries = polygonSeries
 
         // Pie chart creationg
-        var pieChart = this.map.seriesContainer.createChild(am4charts.PieChart);
+        let pieChart = this.map.seriesContainer.createChild(am4charts.PieChart);
         // Set width/heigh of a pie chart for easier positioning only
         pieChart.width = 500;
         pieChart.height = 500;
@@ -322,11 +322,11 @@ export default class Map extends Component {
             { value: 100, category: "Rock" }
         ];
         // Chart styling
-        var dropShadowFilter = new am4core.DropShadowFilter();
+        let dropShadowFilter = new am4core.DropShadowFilter();
         dropShadowFilter.blur = 4;
         pieSeries.filters.push(dropShadowFilter); 
 
-        var sliceTemplate = pieSeries.slices.template;
+        let sliceTemplate = pieSeries.slices.template;
         sliceTemplate.fillOpacity = 1
         sliceTemplate.strokeWidth=0;
         sliceTemplate.tooltipText = "{category}: {value.value} / {value.percent} %";
@@ -339,7 +339,7 @@ export default class Map extends Component {
         pieSeries.slices.template.states.getKey("hover").properties.scale = 1;
         pieSeries.slices.template.states.getKey("active").properties.shiftRadius = 0;
         // Labels styling
-        var labelTemplate = pieSeries.labels.template;
+        let labelTemplate = pieSeries.labels.template;
         labelTemplate.nonScaling = true;
         labelTemplate.fill = am4core.color("#000000");
         labelTemplate.fontSize = 20;
@@ -354,8 +354,7 @@ export default class Map extends Component {
     } // Comp did mount
     setHoverState = () =>{
         console.log("hoverstate")
-        for (var i = 0; i < Object.entries(this.countryColors).length; i++) {
-            let countryId = Object.entries(this.countryColors)[i][0]
+        for (let i = 0; i < Object.entries(this.countryColors).length; i++) {
             let color = Object.entries(this.countryColors)[i][1]
             let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
             if(polygon != null){
@@ -376,8 +375,7 @@ export default class Map extends Component {
         if(this.showAllEnabled===false){
             console.log("enable")
             this.showAllEnabled=true
-            for (var i = 0; i < Object.entries(this.countryColors).length; i++) {
-                let countryId = Object.entries(this.countryColors)[i][0]
+            for (let i = 0; i < Object.entries(this.countryColors).length; i++) {
                 let color = Object.entries(this.countryColors)[i][1]
                 let polygon=this.mapSeries.getPolygonById(Object.entries(this.countryColors)[i][0])
                 polygon.fill=am4core.color(color)
@@ -386,7 +384,7 @@ export default class Map extends Component {
         else if(this.showAllEnabled === true){
             this.showAllEnabled=false
             console.log("disable")
-            for (var i = 0; i < this.mapSeries.mapPolygons.length; i++) {
+            for (let i = 0; i < this.mapSeries.mapPolygons.length; i++) {
                 let polygon = this.mapSeries.mapPolygons.getIndex(i);
                 polygon.fill=am4core.color("#514E61")
             }

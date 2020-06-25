@@ -233,8 +233,8 @@ function CountryDetails(props) {
           <div className="artist" key={uuidv4()}>{topChartsArtist[i]}</div>
           <div className="genre" key={uuidv4()}>{topChartsGenre[i]}</div>
           <div className="button_container">
-            <div className="spotify-btn" onClick= {() => playerClicSpotify(i)} key={uuidv4()}><img src={spotifyButton}></img></div>
-            <div className="applemusic-btn" onClick= {() => playerClicAppleMusic(i)} key={uuidv4()}><img src={appleButton}></img></div>
+            <div className="spotify-btn" onClick= {() => playerClicSpotify(i)} key={uuidv4()}><img alt="Play song" src={spotifyButton}></img></div>
+            <div className="applemusic-btn" onClick= {() => playerClicAppleMusic(i)} key={uuidv4()}><img alt="Play song" src={appleButton}></img></div>
           </div>
         </div>
       </div>)
