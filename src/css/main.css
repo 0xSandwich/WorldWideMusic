@@ -427,12 +427,13 @@ COUNTRY DETAILS
     overflow-y: scroll !important;
     overflow-x: hidden !important; }
   .country-modal .modal-menu {
-    margin: 0px -45px 15px -45px;
+    margin: 0px -45px 0px -45px;
     width: calc(100% + 90px);
     height: 80px;
     display: flex;
     flex-direction: row; }
     .country-modal .modal-menu h1 {
+      margin: 0px;
       width: auto;
       font-size: 16px;
       line-height: 16px; }
@@ -441,7 +442,7 @@ COUNTRY DETAILS
       cursor: pointer;
       height: 100%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       transition: border-bottom 2s;
       border-bottom: solid 2px rgba(128, 128, 128, 0.3); }
@@ -472,7 +473,9 @@ COUNTRY DETAILS
   .country-modal h1 {
     width: 90%;
     font-size: 26px;
-    line-height: 30px; }
+    line-height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px; }
   .country-modal .product-albums-container {
     width: 100%;
     height: auto;
