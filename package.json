@@ -1,7 +1,7 @@
 {
   "name": "map",
   "version": "0.1.0",
-  "homepage": "https://worldwidemusic.net",
+  "homepage": "https://chotardlucien.github.io/WorldWideMusic",
   "private": true,
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.26",
